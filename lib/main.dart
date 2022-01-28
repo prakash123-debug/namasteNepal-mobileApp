@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
+import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
+import 'package:namaste_nepal/Provider/announcementProvider.dart';
+import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Provider/languageProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
@@ -19,6 +22,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => LanguageProvider()),
+        ChangeNotifierProvider(create: (ctx) => AnnouncementCategoryProvider()),
+        ChangeNotifierProvider(create: (ctx) => AnnouncementProvider()),
+        ChangeNotifierProvider(create: (ctx) => BranchProvider())
       ],
       child: MaterialApp(
         builder: EasyLoading.init(),

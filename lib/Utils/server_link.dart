@@ -6,5 +6,5 @@
 
 // live server
 
-String link = "https://nagarpalika-app-backend.herokuapp.com/api";
-String imageLink = "https://bootwal.s3.us-east-2.amazonaws.com/tourism";
+String link = "http://192.168.1.64:5000";
+String imageLink = "http://192.168.1.64:5000";
