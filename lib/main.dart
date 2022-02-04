@@ -5,6 +5,7 @@ import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/bottomNavProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
+import 'package:namaste_nepal/Provider/functionProvider.dart';
 import 'package:namaste_nepal/Provider/languageProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => AnnouncementCategoryProvider()),
         ChangeNotifierProvider(create: (ctx) => AnnouncementProvider()),
         ChangeNotifierProvider(create: (ctx) => BranchProvider()),
-        ChangeNotifierProvider(create: (ctx) => BottomNavProvider())
+        ChangeNotifierProvider(create: (ctx) => BottomNavProvider()),
+        ChangeNotifierProvider(create: (ctx) => FunctionProvider())
       ],
       child: MaterialApp(
         builder: EasyLoading.init(),

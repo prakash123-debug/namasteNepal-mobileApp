@@ -9,7 +9,7 @@ class Announcement {
   String title;
   int branchId;
   int announcementCategoryId;
-  // String announcementImage;
+  String announcementImage;
   String description;
   String publisherFullname;
   int publisherId;
@@ -20,7 +20,7 @@ class Announcement {
     required this.title,
     required this.branchId,
     required this.announcementCategoryId,
-    // required this.announcementImage,
+    required this.announcementImage,
     required this.description,
     required this.publisherFullname,
     required this.publisherId,
@@ -47,7 +47,8 @@ class AnnouncementProvider extends ChangeNotifier {
           title: announcement["title"],
           branchId: announcement["branchId"],
           announcementCategoryId: announcement["announcementCategoryId"],
-          // announcementImage: announcement["announcementImage"],
+          announcementImage:
+              "$imageLink/${announcement["announcementImage"]["fileName"]}",
           description: announcement["description"],
           publisherFullname: announcement["Publisher"]["fullName"],
           publisherId: announcement["userId"],

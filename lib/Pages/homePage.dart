@@ -6,6 +6,7 @@ import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Widgets/announcementGridView.dart';
 import 'package:namaste_nepal/Widgets/bottomNavBar.dart';
+import 'package:namaste_nepal/Widgets/functionGrid.dart';
 import 'package:namaste_nepal/Widgets/homePageCarousel.dart';
 import 'package:namaste_nepal/Widgets/mainPageCategory.dart';
 import 'package:namaste_nepal/Widgets/menuNotification.dart';
@@ -53,13 +54,14 @@ class _HomePageState extends State<HomePage> {
           height: deviceHeight,
           width: deviceWidth,
           // color: Colors.red,
-          child: Column(
+          child: ListView(
             children: [
               menuNotification(context),
               carouselImplement(context),
               Divider(
                 thickness: 2,
-              )
+              ),
+              functionGrid(context)
             ],
           ),
         ),
