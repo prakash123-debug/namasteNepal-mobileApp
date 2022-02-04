@@ -6,5 +6,5 @@
 
 // live server
 
-String link = "http://192.168.1.64:5000";
-String imageLink = "http://192.168.1.64:5000";
+String link = "http://192.168.1.68:5000";
+String imageLink = "http://192.168.1.68:5000";

@@ -4,6 +4,11 @@ import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
+import 'package:namaste_nepal/Widgets/announcementGridView.dart';
+import 'package:namaste_nepal/Widgets/bottomNavBar.dart';
+import 'package:namaste_nepal/Widgets/homePageCarousel.dart';
+import 'package:namaste_nepal/Widgets/mainPageCategory.dart';
+import 'package:namaste_nepal/Widgets/menuNotification.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,6 +43,27 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // loading(context);
-    return Scaffold();
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      bottomNavigationBar: BottomNavBar(),
+      body: SafeArea(
+        child: Container(
+          height: deviceHeight,
+          width: deviceWidth,
+          // color: Colors.red,
+          child: Column(
+            children: [
+              menuNotification(context),
+              carouselImplement(context),
+              Divider(
+                thickness: 2,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
