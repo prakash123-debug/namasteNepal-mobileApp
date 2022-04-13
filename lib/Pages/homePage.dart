@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
+import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
+import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
@@ -25,7 +27,8 @@ class _HomePageState extends State<HomePage> {
   void serverCall() {
     Provider.of<AnnouncementCategoryProvider>(context)
         .getAllAnnouncementCategory();
-
+    Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
+    Provider.of<ArticleProvider>(context).getAllArticle();
     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
     Provider.of<BranchProvider>(context).getAllBranches();
   }
