@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
-import 'package:namaste_nepal/Widgets/listOfTabBar.dart';
+import 'package:namaste_nepal/Provider/articleProvider.dart';
+import 'package:namaste_nepal/Widgets/listOfTabBar/announcementTabBarList.dart';
+import 'package:namaste_nepal/Widgets/listOfTabBar/articleTabBarList.dart';
+
 import 'package:provider/provider.dart';
 
 Widget tabsForCategories({required BuildContext context}) {
@@ -8,6 +11,7 @@ Widget tabsForCategories({required BuildContext context}) {
   double deviceHeight = MediaQuery.of(context).size.height;
   List<Announcement> announcement =
       Provider.of<AnnouncementProvider>(context).announcement;
+  List<Article> article = Provider.of<ArticleProvider>(context).article;
   List<Map<String, dynamic>> tabsList = [
     {"title": "All", "icon": Icons.list},
     // {"title": "Announcement", "icon": Icons.announcement},
@@ -63,7 +67,7 @@ Widget tabsForCategories({required BuildContext context}) {
 
             // Article
 
-            announcement.length == 0
+            article.length == 0
                 ? Center(
                     child: Text(
                       "No Article Found !!",
@@ -78,8 +82,7 @@ Widget tabsForCategories({required BuildContext context}) {
                           padding: EdgeInsets.symmetric(
                               vertical: deviceHeight * 0.01,
                               horizontal: deviceWidth * 0.06),
-                          child: showAnnouncementList(
-                              context, announcement[index]),
+                          child: showArticleList(context, article[index]),
                         )),
 
             // Report

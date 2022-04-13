@@ -1,10 +1,10 @@
 // // String link = "http://65.0.18.172:5000/api";
 
 // local server
-// String link = "http://192.168.137.112:5000/api";
-// String imageLink = "http://192.168.137.112:5000";
+String link = "http://192.168.1.71:5000";
+String imageLink = "http://192.168.1.71:5000";
 
 // live server
 
-String link = "http://192.168.1.68:5000";
-String imageLink = "http://192.168.122.1:5000/uploads/images";
+// String link = "https://api.prakashacharya2056.com.np";
+// String imageLink = "https://api.prakashacharya2056.com.np/uploads/images";

@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
+import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
+import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/bottomNavProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Provider/functionProvider.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => AnnouncementProvider()),
         ChangeNotifierProvider(create: (ctx) => BranchProvider()),
         ChangeNotifierProvider(create: (ctx) => BottomNavProvider()),
-        ChangeNotifierProvider(create: (ctx) => FunctionProvider())
+        ChangeNotifierProvider(create: (ctx) => FunctionProvider()),
+        ChangeNotifierProvider(create: (ctx) => ArticleCategoryProvider()),
+        ChangeNotifierProvider(create: (ctx) => ArticleProvider())
       ],
       child: MaterialApp(
         builder: EasyLoading.init(),
