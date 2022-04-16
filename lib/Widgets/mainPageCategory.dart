@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
+import 'package:namaste_nepal/Provider/programProvider.dart';
 import 'package:namaste_nepal/Widgets/listOfTabBar/announcementTabBarList.dart';
 import 'package:namaste_nepal/Widgets/listOfTabBar/articleTabBarList.dart';
+import 'package:namaste_nepal/Widgets/listOfTabBar/programTabBarList.dart';
 
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,8 @@ Widget tabsForCategories({required BuildContext context}) {
   List<Announcement> announcement =
       Provider.of<AnnouncementProvider>(context).announcement;
   List<Article> article = Provider.of<ArticleProvider>(context).article;
+
+  List<Program> program = Provider.of<ProgramProvider>(context).program;
   List<Map<String, dynamic>> tabsList = [
     {"title": "All", "icon": Icons.list},
     // {"title": "Announcement", "icon": Icons.announcement},
@@ -106,7 +110,7 @@ Widget tabsForCategories({required BuildContext context}) {
                         )),
 
             // Program
-            announcement.length == 0
+            program.length == 0
                 ? Center(
                     child: Text(
                       "No Program Found !!",
@@ -121,8 +125,7 @@ Widget tabsForCategories({required BuildContext context}) {
                           padding: EdgeInsets.symmetric(
                               vertical: deviceHeight * 0.01,
                               horizontal: deviceWidth * 0.06),
-                          child: showAnnouncementList(
-                              context, announcement[index]),
+                          child: showProgramList(context, program[index]),
                         )),
           ]))
         ],

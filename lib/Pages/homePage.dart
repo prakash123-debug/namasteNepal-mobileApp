@@ -4,6 +4,8 @@ import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
+import 'package:namaste_nepal/Provider/programCategoryProvider.dart';
+import 'package:namaste_nepal/Provider/programProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Widgets/announcementGridView.dart';
@@ -28,6 +30,8 @@ class _HomePageState extends State<HomePage> {
     Provider.of<AnnouncementCategoryProvider>(context)
         .getAllAnnouncementCategory();
     Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
+    Provider.of<ProgramCategoryProvider>(context).getAllprogramCategory();
+    Provider.of<ProgramProvider>(context).getAllProgram();
     Provider.of<ArticleProvider>(context).getAllArticle();
     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
     Provider.of<BranchProvider>(context).getAllBranches();
