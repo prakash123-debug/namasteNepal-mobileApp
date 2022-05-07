@@ -10,11 +10,13 @@ import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Widgets/announcementGridView.dart';
 import 'package:namaste_nepal/Widgets/bottomNavBar.dart';
+import 'package:namaste_nepal/Widgets/drawer.dart';
 import 'package:namaste_nepal/Widgets/functionGrid.dart';
 import 'package:namaste_nepal/Widgets/homePageCarousel.dart';
 import 'package:namaste_nepal/Widgets/mainPageCategory.dart';
 import 'package:namaste_nepal/Widgets/menuNotification.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -48,6 +50,8 @@ class _HomePageState extends State<HomePage> {
     isStarting = false;
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     // loading(context);
@@ -55,7 +59,10 @@ class _HomePageState extends State<HomePage> {
     double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      key: _scaffoldKey,
       bottomNavigationBar: BottomNavBar(),
+      drawer: Drawer(),
+      // showDrawer(context),
       body: SafeArea(
         child: Container(
           height: deviceHeight,
@@ -63,7 +70,9 @@ class _HomePageState extends State<HomePage> {
           // color: Colors.red,
           child: ListView(
             children: [
-              menuNotification(context),
+              // menuNotification(context),
+              MenuNotification(),
+
               carouselImplement(context),
               Divider(
                 thickness: 2,
