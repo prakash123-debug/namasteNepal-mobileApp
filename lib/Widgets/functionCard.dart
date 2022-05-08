@@ -92,12 +92,13 @@ Widget functionCard(BuildContext context, FunctionDetail data) {
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
             height: deviceHeight * 0.02,
           ),
           Container(
-            height: deviceHeight * 0.1,
+            height: deviceHeight * 0.06,
             // color: Colors.red,
             child: ClipRRect(
               child: Image.asset(
@@ -112,9 +113,11 @@ Widget functionCard(BuildContext context, FunctionDetail data) {
               child: Text(
                 data.functionName,
                 maxLines: 2,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    decorationStyle: TextDecorationStyle.dotted,
-                    fontSize: deviceWidth * 0.035),
+                  decorationStyle: TextDecorationStyle.dotted,
+                  fontSize: deviceWidth * 0.035,
+                ),
               ),
             ),
           )

@@ -60,8 +60,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: BottomNavBar(),
-      drawer: Drawer(),
       // showDrawer(context),
       body: SafeArea(
         child: Container(

@@ -26,12 +26,22 @@ class FunctionProvider extends ChangeNotifier {
         functionName: "Branches",
         functionImage: "assets/images/branches.png"),
     FunctionDetail(
-        id: 4,
-        functionName: "Blood Donation",
-        functionImage: "assets/images/bloodDonation.png"),
+        id: 4, functionName: "News", functionImage: "assets/images/news.png"),
     FunctionDetail(
         id: 5,
         functionName: "Social Works",
+        functionImage: "assets/images/socialWork.png"),
+    FunctionDetail(
+        id: 6,
+        functionName: "Announcement",
+        functionImage: "assets/images/hospital.png"),
+    FunctionDetail(
+        id: 7,
+        functionName: "Programs",
+        functionImage: "assets/images/socialWork.png"),
+    FunctionDetail(
+        id: 8,
+        functionName: "Article",
         functionImage: "assets/images/socialWork.png"),
   ];
 
