@@ -10,7 +10,7 @@ import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Widgets/announcementGridView.dart';
 import 'package:namaste_nepal/Widgets/bottomNavBar.dart';
-import 'package:namaste_nepal/Widgets/drawer.dart';
+import 'package:namaste_nepal/Widgets/drawerFunctionList.dart';
 import 'package:namaste_nepal/Widgets/functionGrid.dart';
 import 'package:namaste_nepal/Widgets/homePageCarousel.dart';
 import 'package:namaste_nepal/Widgets/mainPageCategory.dart';
@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       // showDrawer(context),
+      drawer: Drawer(),
       body: SafeArea(
         child: Container(
           height: deviceHeight,
