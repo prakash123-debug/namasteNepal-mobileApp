@@ -29,7 +29,48 @@ class Program {
 }
 
 class ProgramProvider extends ChangeNotifier {
-  List<Program> _program = [];
+  List<Program> _program = [
+    // Program(
+    //     id: 1,
+    //     title: "Rabin Bought a bike",
+    //     branchId: 11,
+    //     programCategoryId: 2,
+    //     programImage:
+    //         "https://images.pexels.com/photos/11765890/pexels-photo-11765890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     description: "This Bike Belongs to Rabin ",
+    //     publisherFullname: "Prajwal Poudel",
+    //     publisherId: 111),
+    // Program(
+    //     id: 1,
+    //     title: "Rabin Bought a bike",
+    //     branchId: 11,
+    //     programCategoryId: 2,
+    //     programImage:
+    //         "https://images.pexels.com/photos/9887601/pexels-photo-9887601.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     description: "This Bike Belongs to Rabin ",
+    //     publisherFullname: "Prajwal Poudel",
+    //     publisherId: 111),
+    // Program(
+    //     id: 1,
+    //     title: "Rabin Bought a bike",
+    //     branchId: 11,
+    //     programCategoryId: 2,
+    //     programImage:
+    //         "https://images.pexels.com/photos/12122867/pexels-photo-12122867.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     description: "This Bike Belongs to Rabin ",
+    //     publisherFullname: "Prajwal Poudel",
+    //     publisherId: 111),
+    // Program(
+    //     id: 1,
+    //     title: "Rabin Bought a bike",
+    //     branchId: 11,
+    //     programCategoryId: 2,
+    //     programImage:
+    //         "https://images.pexels.com/photos/11177218/pexels-photo-11177218.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     description: "This Bike Belongs to Rabin ",
+    //     publisherFullname: "Prajwal Poudel",
+    //     publisherId: 111),
+  ];
   List<Program> get program {
     return [..._program];
   }

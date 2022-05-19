@@ -1,94 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/announcement.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/article.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/branches.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/gallery.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/namasteNepal.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/news.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/programs.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/socialWork.dart';
+import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/functionProvider.dart';
+import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Utils/customPageRoute.dart';
 
 Widget functionCard(BuildContext context, FunctionDetail data) {
   double deviceWidth = MediaQuery.of(context).size.width;
   double deviceHeight = MediaQuery.of(context).size.height;
 
   return Material(
-    color: Colors.grey[200],
+    color: parseColor("#ebebbe"),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     elevation: 2,
     child: MaterialButton(
+      // height: deviceHeight * 0.4,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       splashColor: Theme.of(context).primaryColor.withOpacity(0.4),
       onPressed: () {
-        // print(index);
-        // switch (index) {
-        //   case 0:
+        print(data.id);
+        switch (data.id) {
+          case 1:
 
-        //     // Navigator.pushNamed(context, "/our_information");
+            // Navigator.pushNamed(context, "/our_information");
 
-        //     Navigator.of(context)
-        //         .push(CustomPageRoute(child: OurInformation()));
-        //     break;
+            Navigator.of(context).push(CustomPageRoute(child: NamasteNepal()));
+            break;
 
-        //   case 1:
-        //     // Navigator.pushNamed(context, "/yojanatathaparyojana");
-        //     lunchInApp("com.example.tourism_app");
-        //     break;
+          //   case 1:
+          //     // Navigator.pushNamed(context, "/yojanatathaparyojana");
+          //     lunchInApp("com.example.tourism_app");
+          //     break;
 
-        //   case 2:
-        //     lunchInApp("com.example.hello_mayor");
-        //     break;
+          case 2:
+            // lunchInApp("com.example.hello_mayor");
+            Navigator.of(context).push(CustomPageRoute(child: Gallery()));
 
-        //   case 3:
-        //     // Navigator.pushNamed(context, "/tabpage");
+            break;
 
-        //     Navigator.of(context).push(CustomPageRoute(child: TabPages()));
+          case 3:
+            // Navigator.pushNamed(context, "/tabpage");
 
-        //     break;
+            Navigator.of(context).push(CustomPageRoute(child: Branches()));
 
-        //   case 4:
-        //     // Navigator.pushNamed(context, "/nagarkpalika_woda_patra");
+            break;
 
-        //     Navigator.of(context)
-        //         .push(CustomPageRoute(child: NagarpalikaWodaPatra()));
+          case 4:
+            // Navigator.pushNamed(context, "/nagarkpalika_woda_patra");
 
-        //     break;
+            Navigator.of(context).push(CustomPageRoute(child: News()));
 
-        //   // case 8:
-        //   //   Navigator.pushNamed(context, "/nagarpalika_profile");
-        //   //   break;
+            break;
 
-        //   case 5:
-        //     // Navigator.pushNamed(context, "/revenue");
+          //   // case 8:
+          //   //   Navigator.pushNamed(context, "/nagarpalika_profile");
+          //   //   break;
 
-        //     Navigator.of(context).push(CustomPageRoute(child: Revenue()));
+          case 5:
+            // Navigator.pushNamed(context, "/revenue");
 
-        //     break;
+            Navigator.of(context).push(CustomPageRoute(child: SocialWorks()));
 
-        //   case 6:
-        //     // Navigator.pushNamed(context, "/bivhakharu");
+            break;
 
-        //     Navigator.of(context).push(CustomPageRoute(child: Bivhak()));
+          case 6:
+            // Navigator.pushNamed(context, "/bivhakharu");
 
-        //     break;
+            Navigator.of(context)
+                .push(CustomPageRoute(child: AnnouncementPage()));
 
-        //   case 7:
-        //     // Navigator.pushNamed(context, "/yenKanunNerdeSeek");
+            break;
 
-        //     Navigator.of(context).push(CustomPageRoute(child: YenKanun()));
-        //     break;
+          case 7:
+            // Navigator.pushNamed(context, "/yenKanunNerdeSeek");
 
-        //   case 8:
-        //     // Navigator.pushNamed(context, "/employee");
+            Navigator.of(context).push(CustomPageRoute(child: ProgramsPage()));
+            break;
 
-        //     Navigator.of(context).push(CustomPageRoute(child: Employee()));
-        //     break;
+          case 8:
+            // Navigator.pushNamed(context, "/employee");
 
-        //   case 9:
-        //     // Navigator.pushNamed(context, "/import_number_list_page");
+            Navigator.of(context).push(CustomPageRoute(child: ArticlePage()));
+            break;
 
-        //     Navigator.of(context)
-        //         .push(CustomPageRoute(child: ImportantNumberList()));
-        //     break;
+          //   case 9:
+          //     // Navigator.pushNamed(context, "/import_number_list_page");
 
-        //   default:
-        //     print("To Be Created !!");
-        //     break;
-        // }
+          //     Navigator.of(context)
+          //         .push(CustomPageRoute(child: ImportantNumberList()));
+          //     break;
+
+          default:
+            print("To Be Created !!");
+            break;
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

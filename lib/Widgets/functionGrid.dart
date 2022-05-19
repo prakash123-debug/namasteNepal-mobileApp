@@ -16,12 +16,12 @@ Widget functionGrid(BuildContext context) {
         horizontal: deviceWidth * 0.06, vertical: deviceHeight * 0.02),
     // color: Colors.blue,
     height: listOfFunctions.length <= 3
-        ? deviceHeight * 0.18
-        : (listOfFunctions.length / 3).ceil() * deviceHeight * 0.18,
+        ? deviceHeight * 0.2
+        : (listOfFunctions.length / 3).ceil() * deviceHeight * 0.2,
     child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            childAspectRatio: deviceHeight * 0.0012,
+            childAspectRatio: deviceHeight * 0.001,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
         itemCount: listOfFunctions.length,
