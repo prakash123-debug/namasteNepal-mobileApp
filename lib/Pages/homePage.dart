@@ -60,8 +60,9 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _scaffoldKey,
+      // backgroundColor: parseColor("#ffffd9"),
       // showDrawer(context),
-      drawer: Drawer(),
+      // drawer: Drawer(),
       body: SafeArea(
         child: Container(
           height: deviceHeight,

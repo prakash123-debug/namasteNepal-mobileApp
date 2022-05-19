@@ -52,9 +52,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         builder: EasyLoading.init(),
         theme: ThemeData(
-            primarySwatch: colorCustom, scaffoldBackgroundColor: Colors.white
-            // parseColor("#fafaed")
-            ),
+          primarySwatch: colorCustom,
+          scaffoldBackgroundColor: parseColor("#ffffd9"),
+
+          // parseColor("#fafaed")
+        ),
         home: MyHomePage(),
       ),
     );
