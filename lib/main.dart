@@ -4,6 +4,7 @@ import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
+import 'package:namaste_nepal/Pages/login.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
@@ -23,7 +24,9 @@ import 'package:namaste_nepal/selectPage.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  Get.put<MyDrawerController>(MyDrawerController());
+  WidgetsFlutterBinding.ensureInitialized();
+  // Get.put<MyDrawerController>(MyDrawerController());
+  // Get.lazyPut((() => MyDrawerController()));
 
   runApp(MyApp());
   configLoading();
@@ -50,6 +53,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => UserProvider())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: ThemeData(
           primarySwatch: colorCustom,
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
 
           // parseColor("#fafaed")
         ),
-        home: MyHomePage(),
+        home: const Zoom(),
       ),
     );
   }

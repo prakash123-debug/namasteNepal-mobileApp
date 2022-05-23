@@ -19,7 +19,7 @@ class _ActivitiesState extends State<Activities> {
       body: SafeArea(
         child: Column(
           children: [
-            menuNotification(context),
+            // menuNotification(context),
             announcementGridView(context),
             tabsForCategories(context: context)
           ],

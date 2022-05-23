@@ -11,31 +11,41 @@ import 'package:provider/provider.dart';
 
 import '../material_color.dart';
 
-class MyHomePage extends GetView<MyDrawerController> {
+final ZoomDrawerController z = ZoomDrawerController();
+
+class Zoom extends StatefulWidget {
+  const Zoom({Key? key}) : super(key: key);
+
+  @override
+  _ZoomState createState() => _ZoomState();
+}
+
+class _ZoomState extends State<Zoom> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: parseColor("#E6E457"),
-      body: GetBuilder<MyDrawerController>(
-        builder: (_) => ZoomDrawer(
-          controller: _.zoomDrawerController,
-          style: DrawerStyle.defaultStyle,
-          menuScreen: MenuScreen(),
-          mainScreen: HomePage(),
-          borderRadius: 24.0,
-          showShadow: true,
-          angle: 0.0,
-          drawerShadowsBackgroundColor: Colors.grey,
-          slideWidth: MediaQuery.of(context).size.width * 0.65,
-        ),
-      ),
-    );
+    return ZoomDrawer(
+        controller: z,
+        borderRadius: 24,
+        style: DrawerStyle.defaultStyle,
+        showShadow: true,
+        openCurve: Curves.fastOutSlowIn,
+        drawerShadowsBackgroundColor: Theme.of(context).primaryColor,
+        slideWidth: MediaQuery.of(context).size.width * 0.65,
+        duration: const Duration(milliseconds: 500),
+        angle: 0.0,
+        mainScreen: const Body(),
+        menuScreen: MenuScreen());
   }
 }
 
-class MenuScreen extends GetView<MyDrawerController> {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     double deviceWeight = MediaQuery.of(context).size.width;
@@ -84,29 +94,104 @@ class MenuScreen extends GetView<MyDrawerController> {
   }
 }
 
-class MainScreen extends GetView<MyDrawerController> {
-  const MainScreen({Key? key}) : super(key: key);
+// final zoomDrawerController = ZoomDrawerController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: Center(
-        child: ElevatedButton(
-          onPressed: controller.toggleDrawer,
-          child: Text("Toggle Drawer"),
-        ),
-      ),
-    );
-  }
-}
+// class MyHomePage extends GetView<MyDrawerController> {
+//   @override
+//   Widget build(BuildContext context) {
+//     print("Called");
+//     return Scaffold(
+//       backgroundColor: parseColor("#E6E457"),
+//       body: GetBuilder<MyDrawerController>(
+//         builder: (_) => ZoomDrawer(
+//           controller: zoomDrawerController,
+//           style: DrawerStyle.defaultStyle,
+//           menuScreen: MenuScreen(),
+//           mainScreen: HomePage(),
+//           borderRadius: 24.0,
+//           showShadow: true,
+//           angle: 0.0,
+//           drawerShadowsBackgroundColor: Colors.grey,
+//           slideWidth: MediaQuery.of(context).size.width * 0.65,
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-class MyDrawerController extends GetxController {
-  final zoomDrawerController = ZoomDrawerController();
+// class MenuScreen extends GetView<MyDrawerController> {
+//   const MenuScreen({Key? key}) : super(key: key);
 
-  void toggleDrawer() {
-    print("Toggle drawer");
-    zoomDrawerController.toggle?.call();
-    update();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     double deviceWeight = MediaQuery.of(context).size.width;
+//     double deviceHeight = MediaQuery.of(context).size.height;
+//     bool authorized = Provider.of<UserProvider>(context).authorized;
+//     return Container(
+//       color: colorCustom,
+//       child: SafeArea(
+//           child: Column(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//             drawerProfileViewing(context, authorized),
+//             Divider(
+//               thickness: 0.5,
+//               color: Colors.white,
+//             ),
+//             drawerFunctionList(context),
+//             Divider(
+//               thickness: 0.5,
+//               color: Colors.white,
+//             ),
+//             Container(
+//               padding: EdgeInsets.only(bottom: deviceHeight * 0.02),
+//               child: !authorized
+//                   ? Text("")
+//                   : ElevatedButton(
+//                       child: Text(
+//                         "Logout",
+//                         style: TextStyle(
+//                             color: colorCustom, fontWeight: FontWeight.bold),
+//                       ),
+//                       style: ButtonStyle(
+//                           backgroundColor:
+//                               MaterialStateProperty.all(parseColor("#E6E457")),
+//                           fixedSize: MaterialStateProperty.all(Size(
+//                               MediaQuery.of(context).size.width * 0.4, 10))),
+//                       onPressed: () {
+//                         print("Logout/Login");
+//                         Provider.of<UserProvider>(context, listen: false)
+//                             .UpdateAuthentication(false);
+//                       },
+//                     ),
+//             )
+//           ])),
+//     );
+//   }
+// }
+
+// class MainScreen extends GetView<MyDrawerController> {
+//   const MainScreen({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.blue,
+//       child: Center(
+//         child: ElevatedButton(
+//           onPressed: controller.toggleDrawer,
+//           child: Text("Toggle Drawer"),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class MyDrawerController extends GetxController {
+//   void toggleDrawer() {
+//     print("Toggle drawer");
+//     print(zoomDrawerController.toggle);
+//     zoomDrawerController.toggle?.call();
+//     update();
+//   }
+// }
