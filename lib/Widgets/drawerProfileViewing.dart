@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:namaste_nepal/Pages/login.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/material_color.dart';
 import 'package:provider/provider.dart';
+
+import '../Utils/customPageRoute.dart';
 
 Widget drawerProfileViewing(BuildContext context, bool authorized) {
   double deviceWeight = MediaQuery.of(context).size.width;
@@ -32,8 +35,9 @@ Widget drawerProfileViewing(BuildContext context, bool authorized) {
                           Size(MediaQuery.of(context).size.width * 0.4, 10))),
                   onPressed: () {
                     print("Login");
-                    Provider.of<UserProvider>(context, listen: false)
-                        .UpdateAuthentication(true);
+                    // Provider.of<UserProvider>(context, listen: false)
+                    //     .UpdateAuthentication(true);
+                    Navigator.of(context).push(CustomPageRoute(child: Login()));
                   },
                 ),
                 ElevatedButton(
