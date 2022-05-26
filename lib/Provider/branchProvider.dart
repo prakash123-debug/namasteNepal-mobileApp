@@ -20,7 +20,14 @@ class Branch {
 }
 
 class BranchProvider extends ChangeNotifier {
-  List<Branch> _branches = [];
+  List<Branch> _branches = [
+    Branch(
+        id: 1,
+        name: "Butwal",
+        address: "address",
+        contactNumber: "contactNumber",
+        establishedDate: "establishedDate")
+  ];
   List<Branch> get branches {
     return [..._branches];
   }
