@@ -51,13 +51,14 @@ class _MenuScreenState extends State<MenuScreen> {
     double deviceWeight = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
     bool authorized = Provider.of<UserProvider>(context).authorized;
+    UserDetail userDetail = Provider.of<UserProvider>(context).userData;
     return Container(
       color: colorCustom,
       child: SafeArea(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-            drawerProfileViewing(context, authorized),
+            drawerProfileViewing(context, authorized, userDetail),
             Divider(
               thickness: 0.5,
               color: Colors.white,

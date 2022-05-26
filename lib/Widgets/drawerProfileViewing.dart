@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../Utils/customPageRoute.dart';
 
-Widget drawerProfileViewing(BuildContext context, bool authorized) {
+Widget drawerProfileViewing(
+    BuildContext context, bool authorized, UserDetail userDetail) {
   double deviceWeight = MediaQuery.of(context).size.width;
   double deviceHeight = MediaQuery.of(context).size.height;
   UserDetail userDetail = Provider.of<UserProvider>(context).userData;
@@ -76,19 +77,19 @@ Widget drawerProfileViewing(BuildContext context, bool authorized) {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
-                          "Prajwal Poudel",
+                          userDetail.fullname,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
-                        Text("prajwalpoudel55@gmail.com",
+                        Text(userDetail.email,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
-                        Text("9816488487",
+                        Text(userDetail.phone,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

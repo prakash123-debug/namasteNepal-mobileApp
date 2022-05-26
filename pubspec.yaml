@@ -35,6 +35,9 @@ dependencies:
   flutter_zoom_drawer: ^3.0.2
   get: ^4.6.1
   flutter_vector_icons: ^1.0.0
+  dio: ^4.0.6
+  jwt_decode: ^0.3.1
+  flutter_secure_storage: ^5.0.2
 
 dev_dependencies:
   flutter_test:
