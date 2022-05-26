@@ -93,6 +93,29 @@ class _TwoPanelsState extends State<TwoPanels> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void serverCall() {
+    Provider.of<AnnouncementCategoryProvider>(context)
+        .getAllAnnouncementCategory();
+    Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
+    Provider.of<ProgramCategoryProvider>(context).getAllprogramCategory();
+    Provider.of<ProgramProvider>(context).getAllProgram();
+    Provider.of<ArticleProvider>(context).getAllArticle();
+    Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
+    Provider.of<BranchProvider>(context).getAllBranches();
+  }
+
+  bool isStarting = true;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    if (isStarting) {
+      serverCall();
+    }
+    isStarting = false;
+  }
+
   Widget bothPanels(BuildContext context, BoxConstraints constraints) {
     final ThemeData theme = Theme.of(context);
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -151,27 +174,27 @@ class _TwoPanelsState extends State<TwoPanels> with TickerProviderStateMixin {
 // class _HomePageState extends State<HomePage> {
 //   bool isStarting = true;
 
-//   void serverCall() {
-//     Provider.of<AnnouncementCategoryProvider>(context)
-//         .getAllAnnouncementCategory();
-//     Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
-//     Provider.of<ProgramCategoryProvider>(context).getAllprogramCategory();
-//     Provider.of<ProgramProvider>(context).getAllProgram();
-//     Provider.of<ArticleProvider>(context).getAllArticle();
-//     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
-//     Provider.of<BranchProvider>(context).getAllBranches();
-//   }
+  // void serverCall() {
+  //   Provider.of<AnnouncementCategoryProvider>(context)
+  //       .getAllAnnouncementCategory();
+  //   Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
+  //   Provider.of<ProgramCategoryProvider>(context).getAllprogramCategory();
+  //   Provider.of<ProgramProvider>(context).getAllProgram();
+  //   Provider.of<ArticleProvider>(context).getAllArticle();
+  //   Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
+  //   Provider.of<BranchProvider>(context).getAllBranches();
+  // }
 
-//   @override
-//   void didChangeDependencies() {
-//     // TODO: implement didChangeDependencies
-//     super.didChangeDependencies();
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
+  //   super.didChangeDependencies();
 
-//     if (isStarting) {
-//       serverCall();
-//     }
-//     isStarting = false;
-//   }
+  //   if (isStarting) {
+  //     serverCall();
+  //   }
+  //   isStarting = false;
+  // }
 
 //   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
