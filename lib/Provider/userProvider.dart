@@ -52,36 +52,40 @@ class UserProvider extends ChangeNotifier {
     return _authorized;
   }
 
-  loginServer() async {
+  Future<Response> loginServer() async {
     try {
       Response response = await dio.post("$link/user/login", data: {
         "email": usernameController.text,
         "password": passwordController.text
       });
-      print(response.data);
+      // print(response.data);
       await storage.write(key: tokenKey, value: response.data["accessToken"]);
       Map<String, dynamic> payload = Jwt.parseJwt(response.data["accessToken"]);
-      print(payload["userId"]);
-      getUserByIdFromServer(payload["userId"]).then((value) {
-        UserDetail tempUserData = UserDetail(
-            id: payload["userId"],
-            fullname: value.data["data"]["fullName"],
-            email: value.data["data"]["email"],
-            phone: value.data["data"]["mobileNumber"],
-            gender: value.data["data"]["gender"],
-            address: value.data["data"]["address"],
-            dateOfBirth: value.data["data"]["dateOfBirth"],
-            branchId: value.data["data"]["branch"]["id"]);
+      print(payload);
+      UserDetail tempUserData = UserDetail(
+          id: payload["userId"],
+          fullname: payload["fullName"],
+          email: payload["email"],
+          phone: payload["mobileNumber"],
+          gender: payload["gender"],
+          address: payload["address"],
+          dateOfBirth: payload["dateOfBirth"],
+          branchId: payload["branchId"]);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        UpdateAuthentication(true);
+        usernameController.clear();
+        passwordController.clear();
         _userData = tempUserData;
-        if (value.statusCode == 201) {
-          UpdateAuthentication(true);
-          usernameController.clear();
-          passwordController.clear();
-        }
-      });
+      } else {
+        throw "Something Went Wrong!!";
+      }
+
       notifyListeners();
+
+      return response;
     } catch (err) {
-      print(err);
+      // print(err);
       throw err;
     }
   }
