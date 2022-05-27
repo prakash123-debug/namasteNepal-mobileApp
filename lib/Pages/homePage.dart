@@ -4,6 +4,7 @@ import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
+import 'package:namaste_nepal/Provider/galleryProvider.dart';
 import 'package:namaste_nepal/Provider/programCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/programProvider.dart';
 import 'package:namaste_nepal/Utils/Drawer/drawer.dart';
@@ -102,6 +103,7 @@ class _TwoPanelsState extends State<TwoPanels> with TickerProviderStateMixin {
     Provider.of<ArticleProvider>(context).getAllArticle();
     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
     Provider.of<BranchProvider>(context).getAllBranches();
+    Provider.of<GalleryProvider>(context).getGalleryImagesFromServer();
   }
 
   bool isStarting = true;
