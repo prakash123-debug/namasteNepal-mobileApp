@@ -25,7 +25,9 @@ class _LoginState extends State<Login> {
       //Server Call
       print("serverCall");
 
-      userData.loginServer();
+      userData.loginServer().then((value) => null).catchError((err) {
+        print(err);
+      });
     } else {
       return;
     }
