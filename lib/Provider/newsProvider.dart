@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 import 'package:namaste_nepal/Utils/server_link.dart';
 
-class News {
+class NewsData {
   int id;
   String title;
   String date;
@@ -13,7 +13,7 @@ class News {
   String newsType;
   String image;
 
-  News(
+  NewsData(
       {required this.id,
       required this.date,
       required this.title,
@@ -24,69 +24,69 @@ class News {
 }
 
 class NewsProvider extends ChangeNotifier {
-  List<News> _news = [];
-  //  [
-  //   News(
-  //       id: 001,
-  //       date: "2020-05-11",
-  //       title: "News 01",
-  //       time: "20:00",
-  //       description: "description 001",
-  //       newsType: "newsType",
-  //       image: "image"),
-  //   News(
-  //       id: 002,
-  //       date: "2020-05-11",
-  //       title: "News 02",
-  //       time: "20:00",
-  //       description: "description 002",
-  //       newsType: "newsType",
-  //       image: "image"),
-  //   News(
-  //       id: 003,
-  //       date: "2020-05-11",
-  //       title: "News 03",
-  //       time: "20:00",
-  //       description: "description 003",
-  //       newsType: "newsType",
-  //       image: "image"),
-  //   News(
-  //       id: 004,
-  //       date: "2020-05-11",
-  //       title: "News 04",
-  //       time: "20:00",
-  //       description: "description 004",
-  //       newsType: "newsType",
-  //       image: "image"),
-  //   News(
-  //       id: 005,
-  //       date: "2020-05-11",
-  //       title: "News 05",
-  //       time: "20:00",
-  //       description: "description 005",
-  //       newsType: "newsType",
-  //       image: "image"),
-  // ];
+  List<NewsData> _news = [
+    NewsData(
+        id: 001,
+        date: "2020-05-11",
+        title: "News 01",
+        time: "20:00",
+        description: "description 001",
+        newsType: "newsType",
+        image: "image"),
+    NewsData(
+        id: 002,
+        date: "2020-05-11",
+        title: "News 02",
+        time: "20:00",
+        description: "description 002",
+        newsType: "newsType",
+        image: "image"),
+    NewsData(
+        id: 003,
+        date: "2020-05-11",
+        title: "News 03",
+        time: "20:00",
+        description: "description 003",
+        newsType: "newsType",
+        image: "image"),
+    NewsData(
+        id: 004,
+        date: "2020-05-11",
+        title: "News 04",
+        time: "20:00",
+        description: "description 004",
+        newsType: "newsType",
+        image: "image"),
+    NewsData(
+        id: 005,
+        date: "2020-05-11",
+        title: "News 05",
+        time: "20:00",
+        description: "description 005",
+        newsType: "newsType",
+        image: "image"),
+  ];
 
-  List<News> get news {
+  List<NewsData> get news {
     return [..._news];
   }
 
-  Future fetchNewsList() async {
+  Dio dio = new Dio();
+
+  Future<Response> fetchNewsList() async {
     try {
-      var url = Uri.parse("$link/news");
+      Response response = await dio.get("$link/news");
 
-      http.Response response = await http.get(url);
+      var responseData = response.data;
 
-      var responseData = jsonDecode(response.body);
       print("++++++++++++++++++=");
-      print(responseData["count"]);
+      print(responseData);
       print("++++++++++++++++++");
-      List<News> initialNewsList = [];
+      List<NewsData> initialNewsList = [];
 
       if (response.statusCode == 200) {
-        responseData["rows"].forEach((newsList) {
-          initialNewsList.add(News(
+        responseData["data"].forEach((newsList) {
+          initialNewsList.add(NewsData(
             id: newsList['id'],
             title: newsList['title'],
             description: newsList['description'],
@@ -98,18 +98,17 @@ class NewsProvider extends ChangeNotifier {
         });
 
         _news = initialNewsList;
-        print("========+++============");
-        print(_news.length);
-
-        print("=======++++============");
+      } else {
+        throw "Something Went Wrong !!";
       }
       notifyListeners();
+      return response;
     } catch (err) {
       throw err;
     }
   }
 
-  List<News> getNewsByNewsType(String newsType) {
+  List<NewsData> getNewsByNewsType(String newsType) {
     return _news.where((element) => element.newsType == newsType).toList();
   }
 }
