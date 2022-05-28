@@ -34,15 +34,15 @@ class FunctionProvider extends ChangeNotifier {
     FunctionDetail(
         id: 6,
         functionName: "Announcement",
-        functionImage: "assets/images/hospital.png"),
+        functionImage: "assets/images/announcement.png"),
     FunctionDetail(
         id: 7,
         functionName: "Programs",
-        functionImage: "assets/images/socialWork.png"),
+        functionImage: "assets/images/program.png"),
     FunctionDetail(
         id: 8,
         functionName: "Article",
-        functionImage: "assets/images/socialWork.png"),
+        functionImage: "assets/images/article.png"),
   ];
 
   List<FunctionDetail> get allfunctions {

@@ -14,6 +14,7 @@ import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Provider/functionProvider.dart';
 import 'package:namaste_nepal/Provider/galleryProvider.dart';
 import 'package:namaste_nepal/Provider/languageProvider.dart';
+import 'package:namaste_nepal/Provider/newsProvider.dart';
 import 'package:namaste_nepal/Provider/programCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/programProvider.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ProgramCategoryProvider()),
         ChangeNotifierProvider(create: (ctx) => ProgramProvider()),
         ChangeNotifierProvider(create: (ctx) => UserProvider()),
-        ChangeNotifierProvider(create: (ctx) => GalleryProvider())
+        ChangeNotifierProvider(create: (ctx) => GalleryProvider()),
+        ChangeNotifierProvider(create: (ctx) => NewsProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
