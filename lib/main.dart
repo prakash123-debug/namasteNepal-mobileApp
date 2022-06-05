@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
 
           // parseColor("#fafaed")
         ),
-        home: const Zoom(),
+        home: const HomePage(),
       ),
     );
   }

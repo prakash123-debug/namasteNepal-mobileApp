@@ -11,88 +11,127 @@ import 'package:provider/provider.dart';
 
 import '../material_color.dart';
 
-final ZoomDrawerController z = ZoomDrawerController();
+// class MenuScreen extends StatefulWidget {
+//   const MenuScreen({Key? key}) : super(key: key);
 
-class Zoom extends StatefulWidget {
-  const Zoom({Key? key}) : super(key: key);
+//   @override
+//   State<MenuScreen> createState() => _MenuScreenState();
+// }
 
-  @override
-  _ZoomState createState() => _ZoomState();
-}
+// class _MenuScreenState extends State<MenuScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     double deviceWeight = MediaQuery.of(context).size.width;
+//     double deviceHeight = MediaQuery.of(context).size.height;
+//     bool authorized = Provider.of<UserProvider>(context).authorized;
+//     UserDetail userDetail = Provider.of<UserProvider>(context).userData;
+//     return Container(
+//       color: colorCustom,
+//       child: SafeArea(
+//           child: Column(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//             drawerProfileViewing(context, authorized, userDetail),
+//             Divider(
+//               thickness: 0.5,
+//               color: Colors.white,
+//             ),
+//             drawerFunctionList(context),
+//             Divider(
+//               thickness: 0.5,
+//               color: Colors.white,
+//             ),
+//             Container(
+//               padding: EdgeInsets.only(bottom: deviceHeight * 0.02),
+//               child: !authorized
+//                   ? Text("")
+//                   : ElevatedButton(
+//                       child: Text(
+//                         "Logout",
+//                         style: TextStyle(
+//                             color: colorCustom, fontWeight: FontWeight.bold),
+//                       ),
+//                       style: ButtonStyle(
+//                           backgroundColor:
+//                               MaterialStateProperty.all(parseColor("#E6E457")),
+//                           fixedSize: MaterialStateProperty.all(Size(
+//                               MediaQuery.of(context).size.width * 0.4, 10))),
+//                       onPressed: () {
+//                         print("Logout/Login");
+//                         Provider.of<UserProvider>(context, listen: false)
+//                             .UpdateAuthentication(false);
+//                       },
+//                     ),
+//             )
+//           ])),
+//     );
+//   }
+// }
 
-class _ZoomState extends State<Zoom> {
-  @override
-  Widget build(BuildContext context) {
-    return ZoomDrawer(
-        controller: z,
-        borderRadius: 24,
-        style: DrawerStyle.defaultStyle,
-        showShadow: true,
-        openCurve: Curves.fastOutSlowIn,
-        drawerShadowsBackgroundColor: Theme.of(context).primaryColor,
-        slideWidth: MediaQuery.of(context).size.width * 0.65,
-        duration: const Duration(milliseconds: 500),
-        angle: 0.0,
-        mainScreen: const Body(),
-        menuScreen: MenuScreen());
-  }
-}
-
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({Key? key}) : super(key: key);
-
-  @override
-  State<MenuScreen> createState() => _MenuScreenState();
-}
-
-class _MenuScreenState extends State<MenuScreen> {
-  @override
-  Widget build(BuildContext context) {
-    double deviceWeight = MediaQuery.of(context).size.width;
-    double deviceHeight = MediaQuery.of(context).size.height;
-    bool authorized = Provider.of<UserProvider>(context).authorized;
-    UserDetail userDetail = Provider.of<UserProvider>(context).userData;
-    return Container(
-      color: colorCustom,
-      child: SafeArea(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-            drawerProfileViewing(context, authorized, userDetail),
-            Divider(
-              thickness: 0.5,
-              color: Colors.white,
-            ),
-            drawerFunctionList(context),
-            Divider(
-              thickness: 0.5,
-              color: Colors.white,
-            ),
-            Container(
-              padding: EdgeInsets.only(bottom: deviceHeight * 0.02),
-              child: !authorized
-                  ? Text("")
-                  : ElevatedButton(
-                      child: Text(
-                        "Logout",
-                        style: TextStyle(
-                            color: colorCustom, fontWeight: FontWeight.bold),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(parseColor("#E6E457")),
-                          fixedSize: MaterialStateProperty.all(Size(
-                              MediaQuery.of(context).size.width * 0.4, 10))),
-                      onPressed: () {
-                        print("Logout/Login");
-                        Provider.of<UserProvider>(context, listen: false)
-                            .UpdateAuthentication(false);
-                      },
-                    ),
-            )
-          ])),
-    );
-  }
+Widget showDrawer(BuildContext context) {
+  double deviceWeight = MediaQuery.of(context).size.width;
+  double deviceHeight = MediaQuery.of(context).size.height;
+  bool authorized = Provider.of<UserProvider>(context).authorized;
+  UserDetail userDetail = Provider.of<UserProvider>(context).userData;
+  return Stack(
+    children: [
+      Container(
+        color: colorCustom,
+        child: SafeArea(
+            child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+              drawerProfileViewing(context, authorized, userDetail),
+              Divider(
+                thickness: 0.5,
+                color: Colors.white,
+              ),
+              drawerFunctionList(context),
+              // if (authorized)
+              //   Divider(
+              //     thickness: 0.5,
+              //     color: Colors.white,
+              //   ),
+              // if (authorized)
+              //   Container(
+              //     padding: EdgeInsets.only(bottom: deviceHeight * 0.02),
+              //     child: !authorized
+              //         ? Text("")
+              //         : ElevatedButton(
+              //             child: Text(
+              //               "Logout",
+              //               style: TextStyle(
+              //                   color: colorCustom, fontWeight: FontWeight.bold),
+              //             ),
+              //             style: ButtonStyle(
+              //                 backgroundColor:
+              //                     MaterialStateProperty.all(parseColor("#E6E457")),
+              //                 fixedSize: MaterialStateProperty.all(Size(
+              //                     MediaQuery.of(context).size.width * 0.4, 10))),
+              //             onPressed: () {
+              //               print("Logout/Login");
+              //               Provider.of<UserProvider>(context, listen: false)
+              //                   .UpdateAuthentication(false);
+              //             },
+              //           ),
+              //   )
+            ])),
+      ),
+      Positioned(
+        top: 20,
+        right: 10,
+        child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
+              color: parseColor("#ebebbe"),
+              size: deviceWeight * 0.07,
+            )),
+      )
+    ],
+  );
 }
 
 // final zoomDrawerController = ZoomDrawerController();

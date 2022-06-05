@@ -5,48 +5,48 @@ import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Utils/Drawer/drawer.dart';
 
-class MenuNotification extends StatefulWidget {
-  MenuNotification(
-      {Key? key, required ZoomDrawerController this.zoomDrawerController})
-      : super(key: key);
+// class MenuNotification extends StatefulWidget {
+//   MenuNotification(
+//       {Key? key, required ZoomDrawerController this.zoomDrawerController})
+//       : super(key: key);
 
-  ZoomDrawerController zoomDrawerController;
+//   ZoomDrawerController zoomDrawerController;
 
-  @override
-  State<MenuNotification> createState() => _MenuNotificationState(z: z);
-}
+//   @override
+//   State<MenuNotification> createState() => _MenuNotificationState(z: z);
+// }
 
-class _MenuNotificationState extends State<MenuNotification> {
-  _MenuNotificationState({required this.z});
-  ZoomDrawerController z;
+// class _MenuNotificationState extends State<MenuNotification> {
+//   _MenuNotificationState({required this.z});
+//   ZoomDrawerController z;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-              onPressed: () {
-                print(z.toggle);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           IconButton(
+//               onPressed: () {
+//                 print(z.toggle);
 
-                z.toggle!();
-              },
-              icon: Icon(
-                Icons.menu,
-                color: Theme.of(context).primaryColor,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.notifications_none,
-                color: Theme.of(context).primaryColor,
-              )),
-        ],
-      ),
-    );
-  }
-}
+//                 z.toggle!();
+//               },
+//               icon: Icon(
+//                 Icons.menu,
+//                 color: Theme.of(context).primaryColor,
+//               )),
+//           IconButton(
+//               onPressed: () {},
+//               icon: Icon(
+//                 Icons.notifications_none,
+//                 color: Theme.of(context).primaryColor,
+//               )),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // class MenuNotification extends GetView<MyDrawerController> {
 //   const MenuNotification({Key? key}) : super(key: key);
@@ -75,26 +75,28 @@ class _MenuNotificationState extends State<MenuNotification> {
 //   }
 // }
 
-// Widget menuNotification(BuildContext context) {
-//   return Container(
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         IconButton(
-//             onPressed: () {
-//               return Scaffold.of(context).openDrawer();
-//             },
-//             icon: Icon(
-//               Icons.menu,
-//               color: Theme.of(context).primaryColor,
-//             )),
-//         IconButton(
-//             onPressed: () {},
-//             icon: Icon(
-//               Icons.notifications_none,
-//               color: Theme.of(context).primaryColor,
-//             )),
-//       ],
-//     ),
-//   );
-// }
+Widget menuNotification(
+    BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
+  return Container(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+            onPressed: () {
+              // scaffoldKey.of(context).openDrawer();
+              scaffoldKey.currentState!.openDrawer();
+            },
+            icon: Icon(
+              Icons.menu,
+              color: Theme.of(context).primaryColor,
+            )),
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.notifications_none,
+              color: Theme.of(context).primaryColor,
+            )),
+      ],
+    ),
+  );
+}
