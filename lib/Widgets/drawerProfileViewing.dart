@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Pages/login.dart';
+import 'package:namaste_nepal/Pages/register.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/material_color.dart';
@@ -54,6 +55,8 @@ Widget drawerProfileViewing(
                           Size(MediaQuery.of(context).size.width * 0.4, 10))),
                   onPressed: () {
                     print("Register");
+                    Navigator.of(context)
+                        .push(CustomPageRoute(child: Register()));
                   },
                 ),
               ],
