@@ -17,8 +17,9 @@ Widget drawerProfileViewing(
     padding: EdgeInsets.symmetric(
         horizontal: deviceWeight * 0.02, vertical: deviceHeight * 0.01),
     width: double.infinity,
-    height: deviceHeight * 0.25,
+    height: !authorized ? deviceHeight * 0.2 : deviceHeight * 0.275,
     // color: parseColor("#E6E457"),
+    // color: Colors.blue,
     child: !authorized
         ? Container(
             child: Column(
@@ -32,9 +33,9 @@ Widget drawerProfileViewing(
                   ),
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(parseColor("#E6E457")),
+                          MaterialStateProperty.all(parseColor("#ebebbe")),
                       fixedSize: MaterialStateProperty.all(
-                          Size(MediaQuery.of(context).size.width * 0.4, 10))),
+                          Size(deviceWeight * 0.4, deviceHeight * 0.02))),
                   onPressed: () {
                     print("Login");
                     // Provider.of<UserProvider>(context, listen: false)
@@ -50,9 +51,9 @@ Widget drawerProfileViewing(
                   ),
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(parseColor("#E6E457")),
+                          MaterialStateProperty.all(parseColor("#ebebbe")),
                       fixedSize: MaterialStateProperty.all(
-                          Size(MediaQuery.of(context).size.width * 0.4, 10))),
+                          Size(deviceWeight * 0.4, deviceHeight * 0.02))),
                   onPressed: () {
                     print("Register");
                     Navigator.of(context)
@@ -68,7 +69,7 @@ Widget drawerProfileViewing(
               children: [
                 CircleAvatar(
                   radius: deviceHeight * 0.05,
-                  backgroundColor: parseColor("#E6E457"),
+                  backgroundColor: parseColor("#ebebbe"),
                 ),
                 // User Detail COntainer
                 Expanded(
@@ -86,18 +87,27 @@ Widget drawerProfileViewing(
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(
+                          height: deviceHeight * 0.005,
+                        ),
                         Text(userDetail.email,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          height: deviceHeight * 0.005,
+                        ),
                         Text(userDetail.phone,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          height: deviceHeight * 0.005,
+                        ),
                       ],
                     ),
                   ),
@@ -150,6 +160,34 @@ Widget drawerProfileViewing(
                                     EdgeInsets.only(left: deviceWeight * 0.01),
                                 child: Text(
                                   "Edit",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        splashColor: parseColor("#E6E457"),
+                        onTap: () {
+                          print("Logout/Login");
+                          Provider.of<UserProvider>(context, listen: false)
+                              .UpdateAuthentication(false);
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.logout,
+                                color: Colors.white,
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: deviceWeight * 0.01),
+                                child: Text(
+                                  "Logout",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
