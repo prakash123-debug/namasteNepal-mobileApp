@@ -39,6 +39,8 @@ dependencies:
   jwt_decode: ^0.3.1
   flutter_secure_storage: ^5.0.2
   url_launcher: ^6.1.2
+  dotted_border: ^2.0.0+2
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
