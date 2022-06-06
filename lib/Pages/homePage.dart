@@ -14,6 +14,7 @@ import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Widgets/announcementGridView.dart';
 import 'package:namaste_nepal/Widgets/bottomNavBar.dart';
 import 'package:namaste_nepal/Widgets/drawerFunctionList.dart';
+import 'package:namaste_nepal/Widgets/footerOfficeDetail.dart';
 import 'package:namaste_nepal/Widgets/functionGrid.dart';
 import 'package:namaste_nepal/Widgets/homePageCarousel.dart';
 import 'package:namaste_nepal/Widgets/mainPageCategory.dart';
@@ -233,7 +234,14 @@ class _HomePageState extends State<HomePage> {
               Divider(
                 thickness: 2,
               ),
-              functionGrid(context)
+
+              functionGrid(context),
+
+              Divider(
+                thickness: 2,
+              ),
+
+              footerOfficeDetail(context)
             ],
           ),
         ),
