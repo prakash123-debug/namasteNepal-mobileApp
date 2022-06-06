@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/announcement.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/article.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/branches.dart';
+import 'package:namaste_nepal/Pages/FunctionsPage/donation.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/gallery.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/namasteNepal.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/news.dart';
@@ -91,12 +92,11 @@ Widget functionCard(BuildContext context, FunctionDetail data) {
             Navigator.of(context).push(CustomPageRoute(child: ArticlePage()));
             break;
 
-          //   case 9:
-          //     // Navigator.pushNamed(context, "/import_number_list_page");
+          case 9:
+            // Navigator.pushNamed(context, "/import_number_list_page");
 
-          //     Navigator.of(context)
-          //         .push(CustomPageRoute(child: ImportantNumberList()));
-          //     break;
+            Navigator.of(context).push(CustomPageRoute(child: DonationPage()));
+            break;
 
           default:
             print("To Be Created !!");
