@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
@@ -19,6 +20,7 @@ class UserDetail {
   String address;
   String dateOfBirth;
   int branchId;
+  String profilePicture;
 
   UserDetail(
       {required this.id,
@@ -28,7 +30,8 @@ class UserDetail {
       required this.gender,
       required this.address,
       required this.dateOfBirth,
-      required this.branchId});
+      required this.branchId,
+      required this.profilePicture});
 }
 
 class UserProvider extends ChangeNotifier {
@@ -36,12 +39,13 @@ class UserProvider extends ChangeNotifier {
   final storage = new FlutterSecureStorage();
   UserDetail _userData = UserDetail(
       id: 1,
-      fullname: "fullname",
-      email: "email",
-      phone: "phone",
-      gender: "gender",
-      address: "address",
-      dateOfBirth: "dateOfBirth",
+      fullname: "",
+      email: "",
+      phone: "",
+      gender: "",
+      address: "",
+      dateOfBirth: "",
+      profilePicture: "",
       branchId: 1);
 
   TextEditingController usernameController = TextEditingController();
@@ -66,8 +70,10 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<http.Response> loginServer() async {
+    print("Called");
     try {
       Uri url = Uri.parse("$link/user/login");
+      print(url.toString());
       http.Response response = await http.post(url,
           headers: {'Content-Type': 'application/json; charset=UTF-8'},
           body: json.encode({
@@ -83,6 +89,10 @@ class UserProvider extends ChangeNotifier {
         await storage.write(key: tokenKey, value: data["accessToken"]);
         Map<String, dynamic> payload = Jwt.parseJwt(data["accessToken"]);
         print(payload);
+        String profilePic =
+            "$imageLink/${await getImageFromServer(payload["profilePictureId"])}";
+        print(profilePic);
+
         UserDetail tempUserData = UserDetail(
             id: payload["userId"],
             fullname: payload["fullName"],
@@ -91,6 +101,7 @@ class UserProvider extends ChangeNotifier {
             gender: payload["gender"],
             address: payload["address"] == null ? "null" : payload["address"],
             dateOfBirth: payload["dateOfBirth"],
+            profilePicture: profilePic,
             branchId: payload["branchId"]);
         print(response.statusCode);
         UpdateAuthentication(true);
@@ -110,55 +121,22 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+// Fetching Profile Picture From Server
+  Future<String> getImageFromServer(int id) async {
+    Response getImage = await dio.get("$link/file/$id",
+        options: Options(
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType: ResponseType.json,
+        ));
+
+    return getImage.data["fileData"]["fileName"];
+  }
+
+  // Register User...
+
   Future<http.Response> registerServer() async {
     try {
-      // Register User...
-
-      // int pictureId = await uploadImageOnServer(profilePic!);
-      // FormData formData = FormData.fromMap({
-      //   "fullName": fullNameController.text,
-      //   "mobileNumber": phoneNumberController.text,
-      //   "address": addressController.text,
-      //   "email": usernameController.text,
-      //   "password": passwordController.text,
-      //   "confirmPassword": confirmPasswordController.text,
-      //   "gender": gender,
-      //   "dateOfBirth": dateOfBirth.toString(),
-      //   "branchId": branch!.id,
-      //   "profilePictureId": 26
-      // });
-
-      // int imageId = await uploadImageOnServer(profilePic!);
-
-      // print("========Register User");
-      // Uri url = Uri.parse("$link/user/sign-up");
-      // print("========Register User001");
-
-      // Map<String, dynamic> data = {
-      //   "fullName": fullNameController.text,
-      //   "mobileNumber": phoneNumberController.text,
-      //   "address": addressController.text,
-      //   "email": usernameController.text,
-      //   "password": passwordController.text,
-      //   "confirmPassword": confirmPasswordController.text,
-      //   "gender": gender,
-      //   "dateOfBirth": dateOfBirth.toString(),
-      //   "branchId": branch!.id,
-      //   "profilePictureId": imageId
-      // };
-      // // var userData = jsonEncode(data);
-      // print(data);
-
-      // http.Response registerResponse = await http.post(url, body: data);
-
-      // // Response registerResponse = await haalData(data);
-
-      // print(registerResponse.body);
-      // print("${registerResponse.statusCode}");
-      // notifyListeners();
-      // // return response;
-      // return registerResponse;
-
       int imageId = await uploadImageOnServer(profilePic!);
 
       print("========Register User");
@@ -207,17 +185,23 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  // Send Profile Pic to server
+
   Future<int> uploadImageOnServer(File image) async {
     try {
       FormData picture = FormData.fromMap({
         "image": await MultipartFile.fromFile(profilePic!.path,
-            filename: profilePic!.path.split("/").last)
+            filename: profilePic!.path.split("/").last,
+            contentType: new MediaType("image", "jpeg")),
       });
 
-      // Send Profile Pic to server
-
-      Response imageResponse =
-          await dio.post("$link/file/single", data: picture);
+      Response imageResponse = await dio.post("$link/file/single",
+          data: picture,
+          options: Options(
+            validateStatus: (_) => true,
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+          ));
       print(imageResponse.data);
       print(imageResponse.statusCode);
       return imageResponse.data["file"]["id"];
@@ -243,6 +227,12 @@ class UserProvider extends ChangeNotifier {
 
   void UpdateAuthentication(bool authorized) {
     _authorized = authorized;
+    notifyListeners();
+  }
+
+  void logoutHandler() async {
+    await storage.delete(key: tokenKey);
+    UpdateAuthentication(false);
     notifyListeners();
   }
 }

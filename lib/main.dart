@@ -5,6 +5,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Pages/login.dart';
+import 'package:namaste_nepal/Pages/userProfile.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';

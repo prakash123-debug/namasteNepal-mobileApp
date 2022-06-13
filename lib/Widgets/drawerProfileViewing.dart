@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Pages/login.dart';
 import 'package:namaste_nepal/Pages/register.dart';
+import 'package:namaste_nepal/Pages/userProfile.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Utils/colorsSelect.dart';
 import 'package:namaste_nepal/Utils/material_color.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,7 @@ Widget drawerProfileViewing(
   double deviceWeight = MediaQuery.of(context).size.width;
   double deviceHeight = MediaQuery.of(context).size.height;
   UserDetail userDetail = Provider.of<UserProvider>(context).userData;
+  SelectColor selectColor = new SelectColor();
   return Container(
     padding: EdgeInsets.symmetric(
         horizontal: deviceWeight * 0.02, vertical: deviceHeight * 0.01),
@@ -69,7 +72,8 @@ Widget drawerProfileViewing(
               children: [
                 CircleAvatar(
                   radius: deviceHeight * 0.05,
-                  backgroundColor: parseColor("#ebebbe"),
+                  backgroundColor: selectColor.cardColor,
+                  backgroundImage: NetworkImage(userDetail.profilePicture),
                 ),
                 // User Detail COntainer
                 Expanded(
@@ -85,7 +89,8 @@ Widget drawerProfileViewing(
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              color: selectColor.cardColor,
+                              fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: deviceHeight * 0.005,
@@ -94,7 +99,7 @@ Widget drawerProfileViewing(
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: selectColor.cardColor,
                                 fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: deviceHeight * 0.005,
@@ -103,7 +108,7 @@ Widget drawerProfileViewing(
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: selectColor.cardColor,
                                 fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: deviceHeight * 0.005,
@@ -118,16 +123,18 @@ Widget drawerProfileViewing(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
-                        splashColor: parseColor("#E6E457"),
+                        splashColor: selectColor.cardColor,
                         onTap: () {
                           print("Profile");
+                          Navigator.push(
+                              context, CustomPageRoute(child: UserProfile()));
                         },
                         child: Container(
                           child: Row(
                             children: [
                               Icon(
                                 Icons.person,
-                                color: Colors.white,
+                                color: selectColor.cardColor,
                               ),
                               Padding(
                                 padding:
@@ -135,7 +142,7 @@ Widget drawerProfileViewing(
                                 child: Text(
                                   "Profile",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: selectColor.cardColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               )
@@ -144,7 +151,7 @@ Widget drawerProfileViewing(
                         ),
                       ),
                       InkWell(
-                        splashColor: parseColor("#E6E457"),
+                        splashColor: selectColor.cardColor,
                         onTap: () {
                           print("Edit");
                         },
@@ -153,7 +160,7 @@ Widget drawerProfileViewing(
                             children: [
                               Icon(
                                 Icons.edit,
-                                color: Colors.white,
+                                color: selectColor.cardColor,
                               ),
                               Padding(
                                 padding:
@@ -161,7 +168,7 @@ Widget drawerProfileViewing(
                                 child: Text(
                                   "Edit",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: selectColor.cardColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               )
@@ -170,18 +177,18 @@ Widget drawerProfileViewing(
                         ),
                       ),
                       InkWell(
-                        splashColor: parseColor("#E6E457"),
+                        splashColor: selectColor.cardColor,
                         onTap: () {
                           print("Logout/Login");
                           Provider.of<UserProvider>(context, listen: false)
-                              .UpdateAuthentication(false);
+                              .logoutHandler();
                         },
                         child: Container(
                           child: Row(
                             children: [
                               Icon(
                                 Icons.logout,
-                                color: Colors.white,
+                                color: selectColor.cardColor,
                               ),
                               Padding(
                                 padding:
@@ -189,7 +196,7 @@ Widget drawerProfileViewing(
                                 child: Text(
                                   "Logout",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: selectColor.cardColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               )
