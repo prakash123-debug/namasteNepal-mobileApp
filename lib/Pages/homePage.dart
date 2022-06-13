@@ -225,23 +225,29 @@ class _HomePageState extends State<HomePage> {
           height: deviceHeight,
           width: deviceWidth,
           // color: Colors.red,
-          child: ListView(
+          child: Column(
             children: [
-              // menuNotification(context),
               menuNotification(context, scaffoldKey),
+              Expanded(
+                child: ListView(
+                  children: [
+                    // menuNotification(context),
 
-              carouselImplement(context),
-              Divider(
-                thickness: 2,
+                    carouselImplement(context),
+                    Divider(
+                      thickness: 2,
+                    ),
+
+                    functionGrid(context),
+
+                    Divider(
+                      thickness: 2,
+                    ),
+
+                    footerOfficeDetail(context)
+                  ],
+                ),
               ),
-
-              functionGrid(context),
-
-              Divider(
-                thickness: 2,
-              ),
-
-              footerOfficeDetail(context)
             ],
           ),
         ),

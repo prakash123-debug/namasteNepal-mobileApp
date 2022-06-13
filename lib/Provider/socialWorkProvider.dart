@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import "package:http/http.dart" as http;
 import 'package:namaste_nepal/Utils/server_link.dart';
 
-class Program {
+class SocialWork {
   int id;
   String title;
   int branchId;
@@ -16,7 +16,7 @@ class Program {
   // String publisherImage;
   DateTime dateTime = new DateTime.now();
 
-  Program({
+  SocialWork({
     required this.id,
     required this.title,
     required this.branchId,
@@ -29,9 +29,9 @@ class Program {
   });
 }
 
-class ProgramProvider extends ChangeNotifier {
-  List<Program> _program = [
-    Program(
+class SocialWorkProvider extends ChangeNotifier {
+  List<SocialWork> _socialWork = [
+    SocialWork(
         id: 1,
         title: "Rabin Bought a bike",
         branchId: 11,
@@ -41,7 +41,7 @@ class ProgramProvider extends ChangeNotifier {
         description: "This Bike Belongs to Rabin ",
         publisherFullname: "Prajwal Poudel",
         publisherId: 111),
-    Program(
+    SocialWork(
         id: 1,
         title: "Rabin Bought a bike",
         branchId: 11,
@@ -51,7 +51,7 @@ class ProgramProvider extends ChangeNotifier {
         description: "This Bike Belongs to Rabin ",
         publisherFullname: "Prajwal Poudel",
         publisherId: 111),
-    Program(
+    SocialWork(
         id: 1,
         title: "Rabin Bought a bike",
         branchId: 11,
@@ -61,7 +61,7 @@ class ProgramProvider extends ChangeNotifier {
         description: "This Bike Belongs to Rabin ",
         publisherFullname: "Prajwal Poudel",
         publisherId: 111),
-    Program(
+    SocialWork(
         id: 1,
         title: "Rabin Bought a bike",
         branchId: 11,
@@ -72,8 +72,8 @@ class ProgramProvider extends ChangeNotifier {
         publisherFullname: "Prajwal Poudel",
         publisherId: 111),
   ];
-  List<Program> get program {
-    return [..._program];
+  List<SocialWork> get socialWork {
+    return [..._socialWork];
   }
 
   Future getAllProgram() async {
@@ -82,25 +82,25 @@ class ProgramProvider extends ChangeNotifier {
       http.Response response = await http.get(url);
       var data = jsonDecode(response.body)["data"];
 
-      List<Program> tempHolder = [];
-      data.forEach((program) {
-        tempHolder.add(Program(
-          id: program["id"],
-          title: program["title"],
-          branchId: program["branchId"],
-          programCategoryId: program["programCategoryId"],
+      List<SocialWork> tempHolder = [];
+      data.forEach((socialWork) {
+        tempHolder.add(SocialWork(
+          id: socialWork["id"],
+          title: socialWork["title"],
+          branchId: socialWork["branchId"],
+          programCategoryId: socialWork["programCategoryId"],
           programImage:
-              "$imageLink/${program["photos"][0]["programImage"]["fileName"]}",
-          description: program["description"],
-          publisherFullname: program["organizerUser"]["fullName"],
-          publisherId: program["organizerUser"]["id"],
+              "$imageLink/${socialWork["photos"][0]["programImage"]["fileName"]}",
+          description: socialWork["description"],
+          publisherFullname: socialWork["organizerUser"]["fullName"],
+          publisherId: socialWork["organizerUser"]["id"],
           // publisherImage: announcement["Publisher"]["profilePicture"]
         ));
       });
       // _program = tempHolder;
 
       print("==================Program");
-      print(_program.length);
+      print(_socialWork.length);
       print("==================Program");
     } catch (e) {
       print(e);
@@ -108,7 +108,7 @@ class ProgramProvider extends ChangeNotifier {
     }
   }
 
-  Program getProgramById(int id) {
-    return _program.where((element) => element.id == id).first;
+  SocialWork getProgramById(int id) {
+    return _socialWork.where((element) => element.id == id).first;
   }
 }

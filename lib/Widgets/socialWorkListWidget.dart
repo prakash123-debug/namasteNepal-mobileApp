@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
-import 'package:namaste_nepal/Provider/announcementProvider.dart';
-import 'package:namaste_nepal/Provider/articleProvider.dart';
+
+import 'package:namaste_nepal/Provider/socialWorkProvider.dart';
 import 'package:provider/provider.dart';
 
-Widget articleListWidget(BuildContext context, Article articleData) {
+Widget socialWorkListWidget(BuildContext context, SocialWork socialWork) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
   return Container(
@@ -15,7 +14,7 @@ Widget articleListWidget(BuildContext context, Article articleData) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
-          articleData.title,
+          socialWork.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -35,8 +34,8 @@ Widget articleListWidget(BuildContext context, Article articleData) {
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.02),
                   child: Text(
-                    "${articleData.articleCategoryId}",
-                    // "${Provider.of<AnnouncementCategoryProvider>(context).getCategoryById(articleData.articleCategoryId).categoryName}",
+                    "${socialWork.programCategoryId}",
+                    // "${Provider.of<ProgramCategoryProvider>(context).getCategoryById(programData.programCategoryId).categoryName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -56,7 +55,7 @@ Widget articleListWidget(BuildContext context, Article articleData) {
                   Padding(
                     padding: EdgeInsets.only(left: deviceWidth * 0.02),
                     child: Text(
-                      "${articleData.publisherFullname}",
+                      "${socialWork.publisherFullname}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

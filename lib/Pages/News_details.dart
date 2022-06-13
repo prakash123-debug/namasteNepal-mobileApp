@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -84,18 +85,19 @@ class _NewsDetailsState extends State<NewsDetails> {
                     SizedBox(
                       width: deviceWidth * 0.02,
                     ),
-                    Text(
-                      "${arg['time']}",
-                      style: TextStyle(
-                          fontSize: deviceWidth * 0.03, color: Colors.grey),
-                    )
+                    // Text(
+                    //   "${arg['time']}",
+                    //   style: TextStyle(
+                    //       fontSize: deviceWidth * 0.03, color: Colors.grey),
+                    // )
                   ],
                 ),
                 SizedBox(
                   height: deviceHeight * 0.02,
                 ),
                 // htmlToWidget("${arg['description']}"),
-                Text("${arg['description']}"),
+                HtmlWidget(arg['description']),
+                // Text("${arg['description']}"),
                 SizedBox(
                   height: deviceHeight * 0.03,
                 ),

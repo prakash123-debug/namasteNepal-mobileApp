@@ -16,8 +16,10 @@ import 'package:namaste_nepal/Provider/functionProvider.dart';
 import 'package:namaste_nepal/Provider/galleryProvider.dart';
 import 'package:namaste_nepal/Provider/languageProvider.dart';
 import 'package:namaste_nepal/Provider/newsProvider.dart';
+import 'package:namaste_nepal/Provider/organizationProvider.dart';
 import 'package:namaste_nepal/Provider/programCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/programProvider.dart';
+import 'package:namaste_nepal/Provider/socialWorkProvider.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/Drawer/drawer.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => GalleryProvider()),
         ChangeNotifierProvider(create: (ctx) => NewsProvider()),
         ChangeNotifierProvider(create: (ctx) => DonationProvider()),
+        ChangeNotifierProvider(create: (ctx) => OrganizationProvider()),
+        ChangeNotifierProvider(create: (ctx) => SocialWorkProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
