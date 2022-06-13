@@ -3,11 +3,13 @@ import 'package:namaste_nepal/Pages/FunctionsPage/news.dart';
 import 'package:namaste_nepal/Pages/News_details.dart';
 import 'package:namaste_nepal/Provider/newsProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Utils/colorsSelect.dart';
 import 'package:namaste_nepal/Utils/customPageRoute.dart';
 
 Widget newsCard({required BuildContext context, required NewsData e}) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
+  SelectColor selectColor = new SelectColor();
   return Padding(
     padding: EdgeInsets.only(bottom: deviceHeight * 0.02),
     child: Container(
@@ -15,9 +17,9 @@ Widget newsCard({required BuildContext context, required NewsData e}) {
       height: deviceHeight * 0.1,
       child: Material(
         elevation: 1,
-        color: parseColor("#ebebbe"),
+        color: selectColor.cardColor,
         child: MaterialButton(
-          splashColor: Theme.of(context).primaryColor.withOpacity(0.3),
+          splashColor: selectColor.primaryColor,
           onPressed: () {
             // Navigator.pushNamed(context, "/newsdetails", arguments: {
             // "date": e.date,
@@ -32,7 +34,7 @@ Widget newsCard({required BuildContext context, required NewsData e}) {
               arg: {
                 "date": e.date,
                 "title": e.title,
-                "time": e.time,
+                // "time": e.time,
                 "description": e.description,
                 "image": e.image
               },
@@ -41,7 +43,7 @@ Widget newsCard({required BuildContext context, required NewsData e}) {
             print("=============================");
             print(e.date);
             print(e.title);
-            print(e.time);
+
             print("=============================");
           },
           child: Padding(
@@ -56,14 +58,14 @@ Widget newsCard({required BuildContext context, required NewsData e}) {
                         style: TextStyle(
                             fontSize: deviceWidth * 0.03, color: Colors.grey),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: deviceWidth * 0.04),
-                        child: Text(
-                          e.time,
-                          style: TextStyle(
-                              fontSize: deviceWidth * 0.03, color: Colors.grey),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: deviceWidth * 0.04),
+                      //   child: Text(
+                      //     e.time,
+                      //     style: TextStyle(
+                      //         fontSize: deviceWidth * 0.03, color: Colors.grey),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

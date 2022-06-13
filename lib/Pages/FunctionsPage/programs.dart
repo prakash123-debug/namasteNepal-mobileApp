@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:namaste_nepal/Pages/programProfile.dart';
 import 'package:namaste_nepal/Provider/programProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Utils/colorsSelect.dart';
+import 'package:namaste_nepal/Utils/customPageRoute.dart';
 import 'package:namaste_nepal/Widgets/announcementListWidget.dart';
 import 'package:namaste_nepal/Widgets/programListWidget.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +16,7 @@ class ProgramsPage extends StatefulWidget {
 }
 
 class _ProgramsPageState extends State<ProgramsPage> {
+  SelectColor selectColor = new SelectColor();
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -43,58 +47,67 @@ class _ProgramsPageState extends State<ProgramsPage> {
                         type: MaterialType.card,
                         borderRadius: BorderRadius.circular(10),
                         // color: Colors.white,
-                        color: parseColor("#ebebbe"),
+                        color: selectColor.cardColor,
 
-                        child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: deviceWidth * 0.02,
-                                vertical: deviceHeight * 0.01),
-                            height: deviceHeight * 0.13,
-                            child: index % 2 == 0
-                                ? Row(
-                                    children: [
-                                      Container(
-                                        width: deviceWidth * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CustomPageRoute(
+                                    child: ProgramProfile(
+                                        program: listOfProgram[index])));
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: deviceWidth * 0.001,
+                                  vertical: deviceHeight * 0.01),
+                              height: deviceHeight * 0.15,
+                              child: index % 2 == 0
+                                  ? Row(
+                                      children: [
+                                        Container(
+                                          width: deviceWidth * 0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.network(
-                                            listOfProgram[index].programImage,
-                                            fit: BoxFit.cover,
+                                                BorderRadius.circular(5),
+                                            child: Image.network(
+                                              listOfProgram[index].programImage,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                          child: programListWidget(
-                                              context, listOfProgram[index]))
-                                    ],
-                                  )
-                                : Row(
-                                    children: [
-                                      Expanded(
-                                          child: programListWidget(
-                                              context, listOfProgram[index])),
-                                      Container(
-                                        width: deviceWidth * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
+                                        Expanded(
+                                            child: programListWidget(
+                                                context, listOfProgram[index]))
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        Expanded(
+                                            child: programListWidget(
+                                                context, listOfProgram[index])),
+                                        Container(
+                                          width: deviceWidth * 0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.network(
-                                            listOfProgram[index].programImage,
-                                            fit: BoxFit.cover,
+                                                BorderRadius.circular(5),
+                                            child: Image.network(
+                                              listOfProgram[index].programImage,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
+                                      ],
+                                    )),
+                        ),
                       ),
                     )),
       ),

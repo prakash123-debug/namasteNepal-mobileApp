@@ -35,8 +35,8 @@ Widget announcementListWidget(
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.02),
                   child: Text(
-                    // "${announcementData.announcementCategoryId}",
-                    "${Provider.of<AnnouncementCategoryProvider>(context).getCategoryById(announcementData.announcementCategoryId).categoryName}",
+                    "${announcementData.announcementCategoryId}",
+                    // "${Provider.of<AnnouncementCategoryProvider>(context).getCategoryById(announcementData.announcementCategoryId).categoryName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Theme.of(context).primaryColor),

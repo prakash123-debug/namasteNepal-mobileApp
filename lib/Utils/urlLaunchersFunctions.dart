@@ -22,4 +22,14 @@ class UrlLunchersFunctions {
 
     await launchUrl(emailLaunchUri);
   }
+
+  Future<void> launchInBrowser(String url) async {
+    Uri link = Uri.parse(url);
+    if (!await launchUrl(
+      link,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 }

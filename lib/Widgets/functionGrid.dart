@@ -15,13 +15,14 @@ Widget functionGrid(BuildContext context) {
     padding: EdgeInsets.symmetric(
         horizontal: deviceWidth * 0.06, vertical: deviceHeight * 0.02),
     // color: Colors.blue,
-    height: listOfFunctions.length <= 3
-        ? deviceHeight * 0.2
-        : (listOfFunctions.length / 3).ceil() * deviceHeight * 0.2,
+    height: deviceHeight * 0.6,
+    // listOfFunctions.length <= 3
+    //     ? deviceHeight * 0.25
+    //     : (listOfFunctions.length / 3).ceil() * deviceHeight * 0.25,
     child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            childAspectRatio: deviceHeight * 0.001,
+            childAspectRatio: 0.8,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
         itemCount: listOfFunctions.length,

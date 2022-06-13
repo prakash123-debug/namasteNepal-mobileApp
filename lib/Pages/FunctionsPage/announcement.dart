@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:namaste_nepal/Pages/announcementProfile.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Utils/colorsSelect.dart';
+import 'package:namaste_nepal/Utils/customPageRoute.dart';
 import 'package:namaste_nepal/Widgets/announcementListWidget.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +16,7 @@ class AnnouncementPage extends StatefulWidget {
 }
 
 class _AnnouncementPageState extends State<AnnouncementPage> {
+  SelectColor selectColor = new SelectColor();
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -45,60 +49,72 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                         type: MaterialType.card,
                         borderRadius: BorderRadius.circular(10),
                         // color: Colors.white,
-                        color: parseColor("#ebebbe"),
+                        color: selectColor.cardColor,
 
-                        child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: deviceWidth * 0.02,
-                                vertical: deviceHeight * 0.01),
-                            height: deviceHeight * 0.13,
-                            child: index % 2 == 0
-                                ? Row(
-                                    children: [
-                                      Container(
-                                        width: deviceWidth * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CustomPageRoute(
+                                    child: AnnouncementProfile(
+                                        announcement:
+                                            listOfAnnouncement[index])));
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: deviceWidth * 0.001,
+                                  vertical: deviceHeight * 0.01),
+                              height: deviceHeight * 0.15,
+                              child: index % 2 == 0
+                                  ? Row(
+                                      children: [
+                                        Container(
+                                          width: deviceWidth * 0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.network(
-                                            listOfAnnouncement[index]
-                                                .announcementImage,
-                                            fit: BoxFit.cover,
+                                                BorderRadius.circular(5),
+                                            child: Image.network(
+                                              listOfAnnouncement[index]
+                                                  .announcementImage,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                          child: announcementListWidget(context,
-                                              listOfAnnouncement[index]))
-                                    ],
-                                  )
-                                : Row(
-                                    children: [
-                                      Expanded(
-                                          child: announcementListWidget(context,
-                                              listOfAnnouncement[index])),
-                                      Container(
-                                        width: deviceWidth * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
+                                        Expanded(
+                                            child: announcementListWidget(
+                                                context,
+                                                listOfAnnouncement[index]))
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        Expanded(
+                                            child: announcementListWidget(
+                                                context,
+                                                listOfAnnouncement[index])),
+                                        Container(
+                                          width: deviceWidth * 0.2,
+                                          decoration: BoxDecoration(
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Image.network(
-                                            listOfAnnouncement[index]
-                                                .announcementImage,
-                                            fit: BoxFit.cover,
+                                                BorderRadius.circular(5),
+                                            child: Image.network(
+                                              listOfAnnouncement[index]
+                                                  .announcementImage,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  )),
+                                      ],
+                                    )),
+                        ),
                       ),
                     )),
       ),

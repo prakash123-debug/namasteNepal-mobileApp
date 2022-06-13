@@ -53,14 +53,14 @@ class _DonationPageState extends State<DonationPage> {
                       height: 0,
                       width: deviceWidth * 0.38,
                       decoration: BoxDecoration(
-                          border: Border.all(width: 0.3, color: Colors.grey)),
+                          border: Border.all(width: 0.5, color: Colors.grey)),
                     ),
                     Text("OR"),
                     Container(
                       height: 0,
                       width: deviceWidth * 0.38,
                       decoration: BoxDecoration(
-                          border: Border.all(width: 0.3, color: Colors.grey)),
+                          border: Border.all(width: 0.5, color: Colors.grey)),
                     ),
                   ],
                 ),

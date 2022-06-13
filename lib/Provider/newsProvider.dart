@@ -8,7 +8,7 @@ class NewsData {
   int id;
   String title;
   String date;
-  String time;
+  // String time;
   String description;
   String newsType;
   String image;
@@ -17,7 +17,7 @@ class NewsData {
       {required this.id,
       required this.date,
       required this.title,
-      required this.time,
+      // required this.time,
       required this.description,
       required this.newsType,
       required this.image});
@@ -29,7 +29,7 @@ class NewsProvider extends ChangeNotifier {
         id: 001,
         date: "2020-05-11",
         title: "News 01",
-        time: "20:00",
+        // time: "20:00",
         description: "description 001",
         newsType: "newsType",
         image: "image"),
@@ -37,7 +37,7 @@ class NewsProvider extends ChangeNotifier {
         id: 002,
         date: "2020-05-11",
         title: "News 02",
-        time: "20:00",
+        // time: "20:00",
         description: "description 002",
         newsType: "newsType",
         image: "image"),
@@ -45,7 +45,7 @@ class NewsProvider extends ChangeNotifier {
         id: 003,
         date: "2020-05-11",
         title: "News 03",
-        time: "20:00",
+        // time: "20:00",
         description: "description 003",
         newsType: "newsType",
         image: "image"),
@@ -53,7 +53,7 @@ class NewsProvider extends ChangeNotifier {
         id: 004,
         date: "2020-05-11",
         title: "News 04",
-        time: "20:00",
+        // time: "20:00",
         description: "description 004",
         newsType: "newsType",
         image: "image"),
@@ -61,7 +61,7 @@ class NewsProvider extends ChangeNotifier {
         id: 005,
         date: "2020-05-11",
         title: "News 05",
-        time: "20:00",
+        // time: "20:00",
         description: "description 005",
         newsType: "newsType",
         image: "image"),
@@ -91,7 +91,7 @@ class NewsProvider extends ChangeNotifier {
             title: newsList['title'],
             description: newsList['description'],
             date: newsList['newsDate'],
-            time: newsList['createdAt'],
+            // time: newsList['createdAt'],
             newsType: newsList['newsType'],
             image: newsList["newsImage"],
           ));

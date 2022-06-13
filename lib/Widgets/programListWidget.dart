@@ -35,8 +35,8 @@ Widget programListWidget(BuildContext context, Program programData) {
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.02),
                   child: Text(
-                    // "${programData.programCategoryId}",
-                    "${Provider.of<ProgramCategoryProvider>(context).getCategoryById(programData.programCategoryId).categoryName}",
+                    "${programData.programCategoryId}",
+                    // "${Provider.of<ProgramCategoryProvider>(context).getCategoryById(programData.programCategoryId).categoryName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Theme.of(context).primaryColor),
