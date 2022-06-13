@@ -44,7 +44,11 @@ class _RegisterState extends State<Register> {
     if (_formKey.currentState!.validate()) {
       //Server Call
 
-      userData.registerServer().then((value) => null);
+      userData.registerServer().then((value) {
+        setState(() {
+          imagePicked = false;
+        });
+      });
       // .catchError((err) {
       //   print(err);
       // });
