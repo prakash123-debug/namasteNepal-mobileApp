@@ -54,10 +54,20 @@ class UserProvider extends ChangeNotifier {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
   String? gender;
   DateTime? dateOfBirth;
   File? profilePic;
   Branch? branch;
+  // edit section variable
+  TextEditingController editUsernameController = TextEditingController();
+  TextEditingController editFullNameController = TextEditingController();
+  TextEditingController editPhoneNumberController = TextEditingController();
+  TextEditingController editAddressController = TextEditingController();
+  String? editGender;
+  DateTime? editDateOfBirth;
+  File? editProfilePic;
+  Branch? editBranch;
 
   bool _authorized = false;
 

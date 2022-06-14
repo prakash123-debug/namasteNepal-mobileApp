@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:namaste_nepal/Pages/editUserDetailPage.dart';
 import 'package:namaste_nepal/Pages/login.dart';
 import 'package:namaste_nepal/Pages/register.dart';
 import 'package:namaste_nepal/Pages/userProfile.dart';
@@ -154,6 +155,11 @@ Widget drawerProfileViewing(
                         splashColor: selectColor.cardColor,
                         onTap: () {
                           print("Edit");
+                          Navigator.push(
+                              context,
+                              CustomPageRoute(
+                                  child:
+                                      EditUserDetail(userDetail: userDetail)));
                         },
                         child: Container(
                           child: Row(
