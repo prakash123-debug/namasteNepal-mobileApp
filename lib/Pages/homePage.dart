@@ -182,6 +182,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isStarting = true;
+  bool isLoading = true;
 
   void serverCall() {
     Provider.of<AnnouncementCategoryProvider>(context)
@@ -191,7 +192,11 @@ class _HomePageState extends State<HomePage> {
     Provider.of<ProgramProvider>(context).getAllProgram();
     Provider.of<ArticleProvider>(context).getAllArticle();
     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
-    Provider.of<BranchProvider>(context).getAllBranches();
+    Provider.of<BranchProvider>(context).getAllBranches().then((value) {
+      setState(() {
+        isLoading = false;
+      });
+    }).catchError((e) {});
   }
 
   @override
@@ -209,7 +214,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // loading(context);
+    if (isLoading) {
+      loading(context);
+    } else {
+      dismissLoading();
+    }
     double deviceWidth = MediaQuery.of(context).size.width;
     double deviceHeight = MediaQuery.of(context).size.height;
 

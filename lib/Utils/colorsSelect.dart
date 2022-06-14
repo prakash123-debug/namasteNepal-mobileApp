@@ -6,4 +6,6 @@ class SelectColor {
   Color? cardColor = parseColor("#ebebbe");
   Color? scaffoldBackgroundColor = parseColor("#ffffd9");
   MaterialColor? primaryColor = colorCustom;
+  Color? sucessColor = Colors.green;
+  Color? errorColor = Colors.red;
 }
