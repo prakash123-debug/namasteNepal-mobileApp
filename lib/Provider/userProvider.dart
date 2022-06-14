@@ -184,7 +184,7 @@ class UserProvider extends ChangeNotifier {
         phoneNumberController.clear();
         addressController.clear();
       } else if (registerResponse.statusCode == 500) {
-        throw "Something Went Wrong";
+        throw "Internal Server Error!";
       }
       notifyListeners();
       // return response;

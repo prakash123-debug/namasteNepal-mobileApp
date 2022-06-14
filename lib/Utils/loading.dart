@@ -1,6 +1,7 @@
 // import 'package:bootwal_nagarpalika_app/Providers/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:namaste_nepal/Provider/languageProvider.dart';
 import 'package:provider/provider.dart';
 import './material_color.dart';
@@ -22,10 +23,8 @@ void configLoading() {
 }
 
 Future<void> loading(BuildContext context) async {
-  bool isNepali = Provider.of<LanguageProvider>(context).isNepali;
-  EasyLoading.show(
-      status: isNepali ? "लोड गर्दै..." : "Loading...",
-      maskType: EasyLoadingMaskType.black);
+  // bool isNepali = Provider.of<LanguageProvider>(context).isNepali;
+  EasyLoading.show(status: "Loading...", maskType: EasyLoadingMaskType.black);
 }
 
 Future<void> dismissLoading() async {

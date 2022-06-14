@@ -10,6 +10,8 @@ import 'package:namaste_nepal/Pages/FunctionsPage/gallery.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
+import 'package:namaste_nepal/Utils/loading.dart';
+import 'package:namaste_nepal/Utils/showSnackBarMessage.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/customPageRoute.dart';
@@ -22,6 +24,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  SnackBarViewer snackBarViewer = new SnackBarViewer();
+  bool isLoading = false;
   final ImagePicker _imagePicker = ImagePicker();
   late File image;
   bool imagePicked = false;
@@ -43,15 +47,22 @@ class _RegisterState extends State<Register> {
     print("001");
     if (_formKey.currentState!.validate()) {
       //Server Call
-
+      setState(() {
+        isLoading = true;
+      });
       userData.registerServer().then((value) {
         setState(() {
           imagePicked = false;
+          isLoading = false;
         });
+        snackBarViewer.sucessSnackbar(context, "User Created Sucessfully!!");
+      }).catchError((err) {
+        print(err);
+        setState(() {
+          isLoading = false;
+        });
+        snackBarViewer.errorSnackbar(context, err);
       });
-      // .catchError((err) {
-      //   print(err);
-      // });
     } else {
       return;
     }
@@ -83,6 +94,11 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      loading(context);
+    } else {
+      dismissLoading();
+    }
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
 

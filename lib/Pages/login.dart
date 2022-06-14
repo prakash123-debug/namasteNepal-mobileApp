@@ -4,6 +4,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
+import 'package:namaste_nepal/Utils/loading.dart';
+import 'package:namaste_nepal/Utils/showSnackBarMessage.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/customPageRoute.dart';
@@ -16,6 +18,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  SnackBarViewer snackBarViewer = new SnackBarViewer();
+  bool isLoading = false;
   bool securePassword = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -24,9 +28,21 @@ class _LoginState extends State<Login> {
     if (_formKey.currentState!.validate()) {
       //Server Call
       print("serverCall");
+      setState(() {
+        isLoading = true;
+      });
 
-      userData.loginServer().then((value) => null).catchError((err) {
+      userData.loginServer().then((value) {
+        setState(() {
+          isLoading = false;
+        });
+        snackBarViewer.sucessSnackbar(context, "Login Sucessful!!");
+      }).catchError((err) {
         print(err);
+        setState(() {
+          isLoading = false;
+        });
+        snackBarViewer.errorSnackbar(context, err);
       });
     } else {
       return;
@@ -35,6 +51,11 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      loading(context);
+    } else {
+      dismissLoading();
+    }
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
