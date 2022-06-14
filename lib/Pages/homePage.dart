@@ -4,6 +4,7 @@ import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
+import 'package:namaste_nepal/Provider/carouselImageProvider.dart';
 import 'package:namaste_nepal/Provider/galleryProvider.dart';
 import 'package:namaste_nepal/Provider/newsProvider.dart';
 import 'package:namaste_nepal/Provider/programCategoryProvider.dart';
@@ -192,6 +193,7 @@ class _HomePageState extends State<HomePage> {
     Provider.of<ProgramProvider>(context).getAllProgram();
     Provider.of<ArticleProvider>(context).getAllArticle();
     Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
+    Provider.of<CarouselImageProvider>(context).getCarouselImageFromServer();
     Provider.of<BranchProvider>(context).getAllBranches().then((value) {
       setState(() {
         isLoading = false;

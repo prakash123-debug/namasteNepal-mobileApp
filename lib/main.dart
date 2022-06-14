@@ -13,6 +13,7 @@ import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Provider/bottomNavProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
+import 'package:namaste_nepal/Provider/carouselImageProvider.dart';
 import 'package:namaste_nepal/Provider/donation.dart';
 import 'package:namaste_nepal/Provider/functionProvider.dart';
 import 'package:namaste_nepal/Provider/galleryProvider.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => DonationProvider()),
         ChangeNotifierProvider(create: (ctx) => OrganizationProvider()),
         ChangeNotifierProvider(create: (ctx) => SocialWorkProvider()),
+        ChangeNotifierProvider(create: (ctx) => CarouselImageProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
