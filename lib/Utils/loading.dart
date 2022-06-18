@@ -22,9 +22,9 @@ void configLoading() {
     ..dismissOnTap = false;
 }
 
-Future<void> loading(BuildContext context) async {
+Future<void> loading(BuildContext context, String text) async {
   // bool isNepali = Provider.of<LanguageProvider>(context).isNepali;
-  EasyLoading.show(status: "Loading...", maskType: EasyLoadingMaskType.black);
+  EasyLoading.show(status: "$text...", maskType: EasyLoadingMaskType.black);
 }
 
 Future<void> dismissLoading() async {

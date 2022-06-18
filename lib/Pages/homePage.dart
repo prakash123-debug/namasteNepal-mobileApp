@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      loading(context);
+      loading(context, "Loading");
     } else {
       dismissLoading();
     }

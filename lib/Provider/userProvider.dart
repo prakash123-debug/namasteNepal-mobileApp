@@ -200,8 +200,8 @@ class UserProvider extends ChangeNotifier {
   Future<int> uploadImageOnServer(File image) async {
     try {
       FormData picture = FormData.fromMap({
-        "image": await MultipartFile.fromFile(profilePic!.path,
-            filename: profilePic!.path.split("/").last,
+        "image": await MultipartFile.fromFile(image.path,
+            filename: image.path.split("/").last,
             contentType: new MediaType("image", "jpeg")),
       });
 
