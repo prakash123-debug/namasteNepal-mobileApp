@@ -72,7 +72,7 @@ class _RegisterState extends State<Register> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
+        firstDate: DateTime(1980, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -95,7 +95,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      loading(context);
+      loading(context, "Loading");
     } else {
       dismissLoading();
     }
@@ -330,16 +330,22 @@ class _RegisterState extends State<Register> {
                                           )),
                                           InkWell(
                                             onTap: () async {
-                                              XFile? selectedImage =
-                                                  await _imagePicker.pickImage(
-                                                      source:
-                                                          ImageSource.gallery);
+                                              try {
+                                                XFile? selectedImage =
+                                                    await _imagePicker
+                                                        .pickImage(
+                                                            source: ImageSource
+                                                                .gallery);
 
-                                              setState(() {
-                                                image =
-                                                    File(selectedImage!.path);
-                                                imagePicked = true;
-                                              });
+                                                setState(() {
+                                                  image =
+                                                      File(selectedImage!.path);
+                                                  print(image);
+                                                  imagePicked = true;
+                                                });
+                                              } catch (err) {
+                                                print(err);
+                                              }
                                             },
                                             child: DottedBorder(
                                               color: Colors.grey,

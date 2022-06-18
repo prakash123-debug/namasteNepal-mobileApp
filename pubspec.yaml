@@ -45,6 +45,7 @@ dependencies:
   flutter_widget_from_html: ^0.8.5
   http_parser: ^4.0.1
   flutter_spinkit: ^5.1.0
+  html_editor_enhanced: ^2.2.0+1-dev.1
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:namaste_nepal/Pages/addArticlePage.dart';
 import 'package:namaste_nepal/Pages/articleProfile.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
@@ -25,6 +27,14 @@ class _ArticlePageState extends State<ArticlePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Article"),
+        actions: [
+          IconButton(
+              tooltip: "Add Article",
+              onPressed: () {
+                Navigator.push(context, CustomPageRoute(child: AddArticle()));
+              },
+              icon: Icon(FontAwesomeIcons.plus))
+        ],
       ),
       body: Container(
         // color: Colors.amber,
