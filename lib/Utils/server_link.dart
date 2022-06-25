@@ -3,8 +3,8 @@
 String tokenKey = "com.flutter.jwtToken.access.key";
 
 // local server
-String link = "http://192.168.1.72:5000";
-String imageLink = "http://192.168.1.72:5000/uploads/images";
+String link = "http://192.168.1.76:5000";
+String imageLink = "http://192.168.1.76:5000/uploads/images";
 
 
 // live server
