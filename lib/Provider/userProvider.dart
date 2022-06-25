@@ -21,6 +21,7 @@ class UserDetail {
   String dateOfBirth;
   int branchId;
   String profilePicture;
+  int profilePictureId;
 
   UserDetail(
       {required this.id,
@@ -31,7 +32,8 @@ class UserDetail {
       required this.address,
       required this.dateOfBirth,
       required this.branchId,
-      required this.profilePicture});
+      required this.profilePicture,
+      required this.profilePictureId});
 }
 
 class UserProvider extends ChangeNotifier {
@@ -46,7 +48,8 @@ class UserProvider extends ChangeNotifier {
       address: "",
       dateOfBirth: "",
       profilePicture: "",
-      branchId: 1);
+      branchId: 1,
+      profilePictureId: 1);
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -112,6 +115,7 @@ class UserProvider extends ChangeNotifier {
             address: payload["address"] == null ? "null" : payload["address"],
             dateOfBirth: payload["dateOfBirth"],
             profilePicture: profilePic,
+            profilePictureId: payload["profilePictureId"],
             branchId: payload["branchId"]);
         print(response.statusCode);
         UpdateAuthentication(true);
@@ -189,6 +193,51 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
       // return response;
       return registerResponse;
+    } catch (err) {
+      print(err);
+      throw err;
+    }
+  }
+
+  // edit User Data
+
+  Future<Response> editUserDetail(
+      int userId, bool imagePicked, int profilePictureId) async {
+    try {
+      String? token = await storage.read(key: tokenKey);
+      // collect Data && make FormMap
+      int imageId = imagePicked
+          ? await uploadImageOnServer(editProfilePic!)
+          : profilePictureId;
+
+      print(editBranch!.id);
+
+      int branchId = editBranch!.id;
+      String doB = editDateOfBirth.toString();
+
+      Response response = await dio.patch("$link/user/$userId",
+          data: {
+            "fullName": editFullNameController.text,
+            "email": editUsernameController.text,
+            "mobileNumber": editPhoneNumberController.text,
+            "gender": editGender,
+            "profilePictureId": imageId,
+            "branchId": branchId,
+            "address": editAddressController.text,
+            "dateOfBirth": doB
+          },
+          options: Options(
+              validateStatus: (_) => true,
+              contentType: Headers.jsonContentType,
+              responseType: ResponseType.json,
+              headers: {"Authorization": "Bearer $token"}));
+      print("==============Edit Data");
+      print(response.data);
+      print("==============Edit Data");
+      if (response.statusCode != 200) {
+        throw "Something Went Wrong Please Try Again !!";
+      }
+      return response;
     } catch (err) {
       print(err);
       throw err;
