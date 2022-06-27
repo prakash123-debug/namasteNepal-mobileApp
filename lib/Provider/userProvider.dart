@@ -215,7 +215,7 @@ class UserProvider extends ChangeNotifier {
       int branchId = editBranch!.id;
       String doB = editDateOfBirth.toString();
 
-      Response response = await dio.patch("$link/user/$userId",
+      Response response = await dio.post("$link/user/updateMe",
           data: {
             "fullName": editFullNameController.text,
             "email": editUsernameController.text,
@@ -234,7 +234,7 @@ class UserProvider extends ChangeNotifier {
       print("==============Edit Data");
       print(response.data);
       print("==============Edit Data");
-      if (response.statusCode != 200) {
+      if (response.statusCode != 201) {
         throw "Something Went Wrong Please Try Again !!";
       }
       return response;
