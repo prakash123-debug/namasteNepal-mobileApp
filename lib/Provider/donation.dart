@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:namaste_nepal/Utils/server_link.dart';
 
 class DonationDetail {
   String qrCode;
@@ -10,13 +12,31 @@ class DonationDetail {
 }
 
 class DonationProvider extends ChangeNotifier {
-  DonationDetail _donationDetail = DonationDetail(
-      qrCode:
-          "https://static.wixstatic.com/media/380bd3_04ce0ffe62b544d599ee69d84b4bf7b8~mv2.jpg/v1/fill/w_560,h_776,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Fonepay%20QR%20Code_JPG.jpg",
-      walletId: "9816488487",
-      walletName: "Prajwal Poudel");
+  Dio dio = new Dio();
+  DonationDetail _donationDetail =
+      DonationDetail(qrCode: "qr Code", walletId: "-", walletName: "-");
 
   DonationDetail get donationDetail {
     return _donationDetail;
+  }
+
+  Future<Response> getDonationDetailFromServer() async {
+    try {
+      print("=========Dontaion");
+      Response response = await dio.get("$link/donation");
+      var responseData = response.data;
+      print("=========Dontaion");
+      print(response.data);
+      print("=========Dontaion");
+      _donationDetail = DonationDetail(
+          qrCode:
+              "$imageLink/${responseData["data"][0]["donationImage"]["fileName"]}",
+          walletId: responseData["data"][0]["phoneNo"],
+          walletName: responseData["data"][0]["name"]);
+      notifyListeners();
+      return response;
+    } catch (err) {
+      throw err;
+    }
   }
 }
