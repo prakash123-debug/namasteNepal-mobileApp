@@ -100,28 +100,11 @@ class UserProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         await storage.write(key: tokenKey, value: data["accessToken"]);
-        Map<String, dynamic> payload = Jwt.parseJwt(data["accessToken"]);
-        print(payload);
-        String profilePic =
-            "$imageLink/${await getImageFromServer(payload["profilePictureId"])}";
-        print(profilePic);
+        getDataFromTokenAndSave(data["accessToken"]);
 
-        UserDetail tempUserData = UserDetail(
-            id: payload["userId"],
-            fullname: payload["fullName"],
-            email: payload["email"],
-            phone: payload["mobileNumber"],
-            gender: payload["gender"],
-            address: payload["address"] == null ? "null" : payload["address"],
-            dateOfBirth: payload["dateOfBirth"],
-            profilePicture: profilePic,
-            profilePictureId: payload["profilePictureId"],
-            branchId: payload["branchId"]);
-        print(response.statusCode);
-        UpdateAuthentication(true);
+        updateAuthentication(true);
         usernameController.clear();
         passwordController.clear();
-        _userData = tempUserData;
       } else {
         throw throw data["message"];
       }
@@ -284,14 +267,55 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void UpdateAuthentication(bool authorized) {
+  void updateAuthentication(bool authorized) {
     _authorized = authorized;
     notifyListeners();
   }
 
+  Future checkAuthenticationToServer() async {
+    try {
+      String? token = await storage.read(key: tokenKey);
+      print("Success===================== Auth Checker");
+      print(token);
+      if (token != null) {
+        // Check UserAuth From server!!
+        print("Server Call");
+        getDataFromTokenAndSave(token);
+        updateAuthentication(true);
+      } else {
+        // UnAuthorized User...
+        updateAuthentication(false);
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
   void logoutHandler() async {
     await storage.delete(key: tokenKey);
-    UpdateAuthentication(false);
+    updateAuthentication(false);
+    notifyListeners();
+  }
+
+  getDataFromTokenAndSave(String token) async {
+    Map<String, dynamic> payload = Jwt.parseJwt(token);
+    print(payload);
+    String profilePic =
+        "$imageLink/${await getImageFromServer(payload["profilePictureId"])}";
+    print(profilePic);
+
+    UserDetail tempUserData = UserDetail(
+        id: payload["userId"],
+        fullname: payload["fullName"],
+        email: payload["email"],
+        phone: payload["mobileNumber"],
+        gender: payload["gender"],
+        address: payload["address"] == null ? "null" : payload["address"],
+        dateOfBirth: payload["dateOfBirth"],
+        profilePicture: profilePic,
+        profilePictureId: payload["profilePictureId"],
+        branchId: payload["branchId"]);
+    _userData = tempUserData;
     notifyListeners();
   }
 }

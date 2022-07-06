@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
+import 'package:namaste_nepal/Pages/register.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Utils/showSnackBarMessage.dart';
@@ -238,6 +239,10 @@ class _LoginState extends State<Login> {
                                       GestureDetector(
                                         onTap: () {
                                           print("Register");
+                                          Navigator.push(
+                                              context,
+                                              CustomPageRoute(
+                                                  child: Register()));
                                         },
                                         child: Text(
                                           "Don't have account? Register",
