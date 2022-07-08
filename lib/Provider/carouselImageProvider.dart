@@ -11,34 +11,37 @@ class CarouselImage {
 
 class CarouselImageProvider extends ChangeNotifier {
   Dio dio = new Dio();
+  Urls urls = new Urls();
   List<CarouselImage> _images = [
-    // CarouselImage(
-    //     id: 1,
-    //     imageLink:
-    //         "https://images.pexels.com/photos/7945340/pexels-photo-7945340.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-    // CarouselImage(
-    //     id: 2,
-    //     imageLink:
-    //         "https://images.pexels.com/photos/10346451/pexels-photo-10346451.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-    // CarouselImage(
-    //     id: 3,
-    //     imageLink:
-    //         "https://images.pexels.com/photos/10491863/pexels-photo-10491863.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-    // CarouselImage(
-    //     id: 4,
-    //     imageLink:
-    //         'https://images.pexels.com/photos/10488747/pexels-photo-10488747.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+    CarouselImage(id: 1, imageLink: "assets/images/carousel1.jpg"),
+    CarouselImage(id: 2, imageLink: "assets/images/carousel2.jpg"),
+    CarouselImage(id: 3, imageLink: "assets/images/carousel3.jpg"),
   ];
+
   List<CarouselImage> get images {
     return [..._images];
   }
 
   Future<Response> getCarouselImageFromServer() async {
     try {
-      Response response = await dio.get("$link/slider");
-      print("=============Slider");
-      print(response.data);
-      print("=============Slider");
+      Response response = await dio.get("$link${Urls().sliderUrl}");
+
+      List<CarouselImage> tempHolder = [];
+
+      response.data["rows"].forEach((values) {
+        values["photos"].forEach((photos) {
+          print("=============Slider");
+          print(photos);
+          print("=============Slider");
+          tempHolder.add(CarouselImage(
+              id: photos["imageId"],
+              imageLink: "$imageLink/${photos["sliderImages"]["fileName"]}"));
+        });
+      });
+
+      _images = tempHolder;
+      notifyListeners();
+
       return response;
     } catch (err) {
       throw err;

@@ -3,8 +3,12 @@
 String tokenKey = "com.flutter.jwtToken.access.key";
 
 // local server
-String link = "http://192.168.1.71:5000";
-String imageLink = "http://192.168.1.71:5000/uploads/images";
+String link = "http://192.168.10.117:5000";
+String imageLink = "http://192.168.10.117:5000/uploads/images";
+
+class Urls {
+  String sliderUrl = "/slider";
+}
 
 
 // live server
