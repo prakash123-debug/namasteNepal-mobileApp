@@ -12,11 +12,7 @@ class CarouselImage {
 class CarouselImageProvider extends ChangeNotifier {
   Dio dio = new Dio();
   Urls urls = new Urls();
-  List<CarouselImage> _images = [
-    CarouselImage(id: 1, imageLink: "assets/images/carousel1.jpg"),
-    CarouselImage(id: 2, imageLink: "assets/images/carousel2.jpg"),
-    CarouselImage(id: 3, imageLink: "assets/images/carousel3.jpg"),
-  ];
+  List<CarouselImage> _images = [];
 
   List<CarouselImage> get images {
     return [..._images];
