@@ -280,8 +280,20 @@ class UserProvider extends ChangeNotifier {
       if (token != null) {
         // Check UserAuth From server!!
         print("Server Call");
-        getDataFromTokenAndSave(token);
-        updateAuthentication(true);
+
+        Response response = await dio.post("$link${Urls().authChecker}",
+            options: Options(
+                validateStatus: (_) => true,
+                contentType: Headers.jsonContentType,
+                responseType: ResponseType.json,
+                headers: {"Authorization": "Bearer $token"}));
+        if (response.statusCode == 200) {
+          getDataFromTokenAndSave(token);
+          updateAuthentication(true);
+        } else if (response.statusCode == 401) {
+          await storage.delete(key: tokenKey);
+          updateAuthentication(false);
+        }
       } else {
         // UnAuthorized User...
         updateAuthentication(false);
