@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:namaste_nepal/Pages/forgetPassword.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Pages/register.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
@@ -203,7 +204,10 @@ class _LoginState extends State<Login> {
                                         // color: Colors.red,
                                         child: GestureDetector(
                                           onTap: () {
-                                            print("Forget Password");
+                                            Navigator.push(
+                                                context,
+                                                CustomPageRoute(
+                                                    child: ForgetPassword()));
                                           },
                                           child: Text(
                                             "Forget Password?",
