@@ -303,6 +303,36 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  Future<Response> changePasswordInServer(String currentPassword,
+      String newPassword, String confirmPassword) async {
+    try {
+      String? token = await storage.read(key: tokenKey);
+      Response response = await dio.post("$link${Urls().changePassword}",
+          data: {
+            "oldPassword": currentPassword,
+            "newPassword": newPassword,
+            "confirmPassword": confirmPassword
+          },
+          options: Options(
+              validateStatus: (_) => true,
+              contentType: Headers.jsonContentType,
+              responseType: ResponseType.json,
+              headers: {"Authorization": "Bearer $token"}));
+      print("=============ChangePassword");
+      print(response.statusCode);
+      print(response.data);
+      print("=============ChangePassword");
+      if (response.statusCode == 500) {
+        // Other Err
+        throw response.data["message"];
+      } else {
+        return response;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
   void logoutHandler() async {
     await storage.delete(key: tokenKey);
     updateAuthentication(false);
