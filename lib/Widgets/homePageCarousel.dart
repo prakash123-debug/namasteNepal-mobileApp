@@ -12,7 +12,7 @@ Widget carouselImplement(BuildContext context) {
   List<String> assetsImages = [
     "assets/images/carousel1.jpg",
     "assets/images/carousel2.jpg",
-    "assets/images/carousel3.jpg",
+    "assets/images/carousel3.jpeg",
   ];
 
   return Container(
