@@ -10,6 +10,7 @@ class Urls {
   String sliderUrl = "/slider";
   String authChecker = "/verifyAuthorized";
   String changePassword = "/user/changePassword";
+  String forgetPassword = "/user/forget";
 }
 
 

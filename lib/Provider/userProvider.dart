@@ -333,6 +333,25 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  Future<Response> forgetPassword(String email) async {
+    try {
+      Response response = await dio.post("$link${Urls().forgetPassword}",
+          data: {"email": email},
+          options: Options(
+            validateStatus: (_) => true,
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+          ));
+      if (response.statusCode == 500) {
+        throw "Internal Server Error!";
+      } else {
+        return response;
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
   void logoutHandler() async {
     await storage.delete(key: tokenKey);
     updateAuthentication(false);
