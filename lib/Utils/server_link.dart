@@ -9,6 +9,7 @@ String imageLink = "http://192.168.1.71:5000/uploads/images";
 class Urls {
   String sliderUrl = "/slider";
   String authChecker = "/verifyAuthorized";
+  String changePassword = "/user/changePassword";
 }
 
 

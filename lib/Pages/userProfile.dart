@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:namaste_nepal/Pages/editUserDetailPage.dart';
 import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/colorsSelect.dart';
+import 'package:namaste_nepal/Utils/customPageRoute.dart';
+import 'package:namaste_nepal/Widgets/changePasswordBottomSheet.dart';
 import 'package:namaste_nepal/Widgets/userProfileBody.dart';
 import 'package:namaste_nepal/Widgets/userProfileHeader.dart';
 import 'package:provider/provider.dart';
@@ -36,38 +40,87 @@ class _UserProfileState extends State<UserProfile> {
                   //   height: deviceHeight * 0.05,
                   // ),
                   userProfileBody(context, userDetail),
-                  GestureDetector(
-                    onTap: () {
-                      print("Edit Profile");
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: deviceWidth * 0.5,
-                      height: deviceHeight * 0.05,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment(0.8, 1),
-                            colors: <Color>[
-                              // Color(0xff1f005c),
-                              // Color(0xff5b0060),
-                              // Color(0xff870160),
-                              // Color(0xffac255e),
-                              Color(0xffca485c),
-                              Color(0xffe16b5c),
-                              Color(0xfff39060),
-                              Color(0xffffb56b),
-                            ],
-                            tileMode: TileMode.mirror,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          print("Edit Profile");
+                          Navigator.push(
+                              context,
+                              CustomPageRoute(
+                                  child:
+                                      EditUserDetail(userDetail: userDetail)));
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: deviceWidth * 0.08,
+                              vertical: deviceHeight * 0.015),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment(0.8, 1),
+                                colors: <Color>[
+                                  // Color(0xff1f005c),
+                                  // Color(0xff5b0060),
+                                  // Color(0xff870160),
+                                  // Color(0xffac255e),
+                                  Color(0xffca485c),
+                                  Color(0xffe16b5c),
+                                  Color(0xfff39060),
+                                  Color(0xffffb56b),
+                                ],
+                                tileMode: TileMode.mirror,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(deviceWidth * 0.03)),
+                          child: Text(
+                            "Edit Profile",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: deviceWidth * 0.045),
                           ),
-                          borderRadius:
-                              BorderRadius.circular(deviceWidth * 0.03)),
-                      child: Text(
-                        "Edit Profile",
-                        style: TextStyle(
-                            color: Colors.white, fontSize: deviceWidth * 0.045),
+                        ),
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: () {
+                          changePasswordBottomSheet(context);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: deviceWidth * 0.025,
+                              vertical: deviceHeight * 0.015),
+                          // width: deviceWidth * 0.45,
+                          // height: deviceHeight * 0.05,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment(0.8, 1),
+                                colors: <Color>[
+                                  // Color(0xff1f005c),
+                                  // Color(0xff5b0060),
+                                  // Color(0xff870160),
+                                  // Color(0xffac255e),
+                                  Color(0xffca485c),
+                                  Color(0xffe16b5c),
+                                  Color(0xfff39060),
+                                  Color(0xffffb56b),
+                                ],
+                                tileMode: TileMode.mirror,
+                              ),
+                              borderRadius:
+                                  BorderRadius.circular(deviceWidth * 0.03)),
+                          child: Text(
+                            "Change Password",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: deviceWidth * 0.045),
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 ]),
             IconButton(
