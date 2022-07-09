@@ -20,7 +20,12 @@ class CarouselImageProvider extends ChangeNotifier {
 
   Future<Response> getCarouselImageFromServer() async {
     try {
-      Response response = await dio.get("$link${Urls().sliderUrl}");
+      Response response = await dio.get("$link${Urls().sliderUrl}",
+          options: Options(
+            validateStatus: (_) => true,
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+          ));
 
       List<CarouselImage> tempHolder = [];
 
