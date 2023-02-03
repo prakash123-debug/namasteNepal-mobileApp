@@ -25,46 +25,46 @@ class NewsData {
 
 class NewsProvider extends ChangeNotifier {
   List<NewsData> _news = [
-    NewsData(
-        id: 001,
-        date: "2020-05-11",
-        title: "News 01",
-        // time: "20:00",
-        description: "description 001",
-        newsType: "newsType",
-        image: "image"),
-    NewsData(
-        id: 002,
-        date: "2020-05-11",
-        title: "News 02",
-        // time: "20:00",
-        description: "description 002",
-        newsType: "newsType",
-        image: "image"),
-    NewsData(
-        id: 003,
-        date: "2020-05-11",
-        title: "News 03",
-        // time: "20:00",
-        description: "description 003",
-        newsType: "newsType",
-        image: "image"),
-    NewsData(
-        id: 004,
-        date: "2020-05-11",
-        title: "News 04",
-        // time: "20:00",
-        description: "description 004",
-        newsType: "newsType",
-        image: "image"),
-    NewsData(
-        id: 005,
-        date: "2020-05-11",
-        title: "News 05",
-        // time: "20:00",
-        description: "description 005",
-        newsType: "newsType",
-        image: "image"),
+    // NewsData(
+    //     id: 001,
+    //     date: "2020-05-11",
+    //     title: "News 01",
+    //     // time: "20:00",
+    //     description: "description 001",
+    //     newsType: "newsType",
+    //     image: "image"),
+    // NewsData(
+    //     id: 002,
+    //     date: "2020-05-11",
+    //     title: "News 02",
+    //     // time: "20:00",
+    //     description: "description 002",
+    //     newsType: "newsType",
+    //     image: "image"),
+    // NewsData(
+    //     id: 003,
+    //     date: "2020-05-11",
+    //     title: "News 03",
+    //     // time: "20:00",
+    //     description: "description 003",
+    //     newsType: "newsType",
+    //     image: "image"),
+    // NewsData(
+    //     id: 004,
+    //     date: "2020-05-11",
+    //     title: "News 04",
+    //     // time: "20:00",
+    //     description: "description 004",
+    //     newsType: "newsType",
+    //     image: "image"),
+    // NewsData(
+    //     id: 005,
+    //     date: "2020-05-11",
+    //     title: "News 05",
+    //     // time: "20:00",
+    //     description: "description 005",
+    //     newsType: "newsType",
+    //     image: "image"),
   ];
 
   List<NewsData> get news {
