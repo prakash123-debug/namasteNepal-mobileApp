@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
@@ -13,8 +15,10 @@ class DonationDetail {
 
 class DonationProvider extends ChangeNotifier {
   Dio dio = new Dio();
-  DonationDetail _donationDetail =
-      DonationDetail(qrCode: "qr Code", walletId: "-", walletName: "-");
+  DonationDetail _donationDetail = DonationDetail(
+      qrCode: "assets/images/qr.png",
+      walletId: "9844708763",
+      walletName: "Arjun Kharel");
 
   DonationDetail get donationDetail {
     return _donationDetail;
@@ -22,21 +26,23 @@ class DonationProvider extends ChangeNotifier {
 
   Future<Response> getDonationDetailFromServer() async {
     try {
-      print("=========Dontaion");
       Response response = await dio.get("$link/donation");
-      var responseData = response.data;
-      print("=========Dontaion");
-      print(response.data);
-      print("=========Dontaion");
-      _donationDetail = DonationDetail(
-          qrCode:
-              "$imageLink/${responseData["data"][0]["donationImage"]["fileName"]}",
-          walletId: responseData["data"][0]["phoneNo"],
-          walletName: responseData["data"][0]["name"]);
+      var responseData = response.data["data"];
+
+      //  DonationDetail donationTmp;
+      responseData.forEach((element) {
+        _donationDetail = DonationDetail(
+            qrCode:
+                "$imageLink/${responseData[0]["donationImage"]["fileName"]}",
+            walletId: responseData[0]["phoneNo"],
+            walletName: responseData[0]["name"]);
+      });
+      // _donationDetail = donationTmp;
       notifyListeners();
       return response;
     } catch (err) {
-      throw err;
+      log(err.toString());
+      rethrow;
     }
   }
 }

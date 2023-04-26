@@ -2,15 +2,16 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
 
 class NewsData {
   int id;
   String title;
-  String date;
+  DateTime date;
   // String time;
   String description;
-  String newsType;
+  // String newsType;
   String image;
 
   NewsData(
@@ -19,7 +20,7 @@ class NewsData {
       required this.title,
       // required this.time,
       required this.description,
-      required this.newsType,
+      // required this.newsType,
       required this.image});
 }
 
@@ -86,14 +87,17 @@ class NewsProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         responseData["data"].forEach((newsList) {
+          DateTime convertedDate =
+              DateFormat("yyyy-mm-dd").parse(newsList["createdAt"]);
+
           initialNewsList.add(NewsData(
             id: newsList['id'],
             title: newsList['title'],
             description: newsList['description'],
-            date: newsList['newsDate'],
+            date: convertedDate,
             // time: newsList['createdAt'],
-            newsType: newsList['newsType'],
-            image: newsList["newsImage"],
+            // newsType: newsList['newsType'],
+            image: "$imageLink/${newsList["newsImage"]["fileName"]}",
           ));
         });
 
@@ -108,7 +112,7 @@ class NewsProvider extends ChangeNotifier {
     }
   }
 
-  List<NewsData> getNewsByNewsType(String newsType) {
-    return _news.where((element) => element.newsType == newsType).toList();
-  }
+  // List<NewsData> getNewsByNewsType(String newsType) {
+  //   return _news.where((element) => element.newsType == newsType).toList();
+  // }
 }

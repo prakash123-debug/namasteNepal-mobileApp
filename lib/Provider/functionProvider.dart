@@ -27,10 +27,12 @@ class FunctionProvider extends ChangeNotifier {
         functionImage: "assets/images/branches.png"),
     FunctionDetail(
         id: 4, functionName: "News", functionImage: "assets/images/news.png"),
+    // FunctionDetail(
+    //     id: 5,
+    //     functionName: "Social Works",
+    //     functionImage: "assets/images/socialWork.png"),
     FunctionDetail(
-        id: 5,
-        functionName: "Social Works",
-        functionImage: "assets/images/socialWork.png"),
+        id: 5, functionName: "Chat", functionImage: "assets/images/chat.png"),
     FunctionDetail(
         id: 6,
         functionName: "Announcement",

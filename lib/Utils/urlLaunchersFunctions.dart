@@ -27,7 +27,7 @@ class UrlLunchersFunctions {
     Uri link = Uri.parse(url);
     if (!await launchUrl(
       link,
-      mode: LaunchMode.externalApplication,
+      mode: LaunchMode.inAppWebView,
     )) {
       throw 'Could not launch $url';
     }

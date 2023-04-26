@@ -7,6 +7,7 @@ Widget announcementListWidget(
     BuildContext context, Announcement announcementData) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
+  var announcementCategory = Provider.of<AnnouncementCategoryProvider>(context);
   return Container(
     padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.02),
     // color: Colors.pink,
@@ -16,12 +17,12 @@ Widget announcementListWidget(
       children: [
         Text(
           announcementData.title,
-          maxLines: 1,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
-              fontSize: deviceWidth * 0.05),
+              fontSize: deviceWidth * 0.04),
         ),
         Column(
           children: [
@@ -31,15 +32,17 @@ Widget announcementListWidget(
                 Icon(
                   Icons.category,
                   color: Theme.of(context).primaryColor,
+                  size: 16,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.02),
                   child: Text(
-                    "${announcementData.announcementCategoryId}",
+                    "${announcementCategory.getCategoryById(announcementData.announcementCategoryId).categoryName}",
                     // "${Provider.of<AnnouncementCategoryProvider>(context).getCategoryById(announcementData.announcementCategoryId).categoryName}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 12),
                   ),
                 )
               ],
@@ -52,6 +55,7 @@ Widget announcementListWidget(
                   Icon(
                     Icons.person,
                     color: Theme.of(context).primaryColor,
+                    size: 16,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: deviceWidth * 0.02),
@@ -60,8 +64,7 @@ Widget announcementListWidget(
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
+                          color: Theme.of(context).primaryColor, fontSize: 12),
                     ),
                   )
                 ],

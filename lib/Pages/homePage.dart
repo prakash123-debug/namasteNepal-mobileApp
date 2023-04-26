@@ -188,17 +188,26 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = true;
 
   void serverCall() {
-    Provider.of<AnnouncementCategoryProvider>(context)
+    Provider.of<AnnouncementCategoryProvider>(context, listen: false)
         .getAllAnnouncementCategory();
-    Provider.of<ArticleCategoryProvider>(context).getAllArticleCategory();
-    Provider.of<ProgramCategoryProvider>(context).getAllprogramCategory();
-    Provider.of<ProgramProvider>(context).getAllProgram();
-    Provider.of<ArticleProvider>(context).getAllArticle();
-    Provider.of<AnnouncementProvider>(context).getAllAnnouncement();
-    Provider.of<CarouselImageProvider>(context).getCarouselImageFromServer();
-    Provider.of<DonationProvider>(context).getDonationDetailFromServer();
-    Provider.of<UserProvider>(context).checkAuthenticationToServer();
-    Provider.of<BranchProvider>(context).getAllBranches().then((value) {
+    Provider.of<ArticleCategoryProvider>(context, listen: false)
+        .getAllArticleCategory();
+    Provider.of<ProgramCategoryProvider>(context, listen: false)
+        .getAllprogramCategory();
+    Provider.of<ProgramProvider>(context, listen: false).getAllProgram();
+    Provider.of<ArticleProvider>(context, listen: false).getAllArticle();
+    Provider.of<NewsProvider>(context, listen: false).fetchNewsList();
+    Provider.of<AnnouncementProvider>(context, listen: false)
+        .getAllAnnouncement();
+    Provider.of<CarouselImageProvider>(context, listen: false)
+        .getCarouselImageFromServer();
+    Provider.of<DonationProvider>(context, listen: false)
+        .getDonationDetailFromServer();
+    Provider.of<UserProvider>(context, listen: false)
+        .checkAuthenticationToServer();
+    Provider.of<BranchProvider>(context, listen: false)
+        .getAllBranches()
+        .then((value) {
       setState(() {
         isLoading = false;
       });
@@ -244,23 +253,28 @@ class _HomePageState extends State<HomePage> {
             children: [
               menuNotification(context, scaffoldKey),
               Expanded(
-                child: ListView(
-                  children: [
-                    // menuNotification(context),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    serverCall();
+                  },
+                  child: ListView(
+                    children: [
+                      // menuNotification(context),
 
-                    carouselImplement(context),
-                    Divider(
-                      thickness: 2,
-                    ),
+                      carouselImplement(context),
+                      Divider(
+                        thickness: 2,
+                      ),
 
-                    functionGrid(context),
+                      functionGrid(context),
 
-                    Divider(
-                      thickness: 2,
-                    ),
+                      Divider(
+                        thickness: 2,
+                      ),
 
-                    footerOfficeDetail(context)
-                  ],
+                      footerOfficeDetail(context)
+                    ],
+                  ),
                 ),
               ),
             ],

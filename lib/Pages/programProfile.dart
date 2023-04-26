@@ -1,12 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:namaste_nepal/Provider/announcementProvider.dart';
+
 import 'package:namaste_nepal/Provider/programProvider.dart';
-import 'package:namaste_nepal/Utils/htmlParser.dart';
+
+import '../Utils/dateConverter.dart';
 
 class ProgramProfile extends StatefulWidget {
   ProgramProfile({Key? key, required Program this.program}) : super(key: key);
@@ -31,6 +31,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
           program.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: TextStyle(fontSize: deviceWidth * 0.042),
         ),
       ),
       body: SafeArea(
@@ -44,9 +45,13 @@ class _ProgramProfileState extends State<ProgramProfile> {
               height: deviceHeight * 0.3,
               width: deviceWidth,
               child: ClipRRect(
-                child: Image.network(
-                  program.programImage,
+                child: CachedNetworkImage(
+                  imageUrl: program.programImage,
                   fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.error,
+                    // color: Colors.red,
+                  ),
                 ),
               ),
             ),
@@ -56,7 +61,7 @@ class _ProgramProfileState extends State<ProgramProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      width: deviceWidth * 0.7,
+                      width: double.infinity,
                       // color: Colors.red,
                       child: Text(
                         program.title,
@@ -64,49 +69,20 @@ class _ProgramProfileState extends State<ProgramProfile> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: deviceWidth * 0.045),
+                            fontSize: deviceWidth * 0.042),
                       )),
                   SizedBox(
-                    height: deviceHeight * 0.05,
-                  ),
-                  Container(
-                      width: deviceWidth,
-                      // color: Colors.red,
-                      child: Text(
-                        "${program.dateTime}",
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: deviceWidth * 0.035,
-                            color: Colors.grey[500]),
-                      )),
-                  SizedBox(
-                    height: deviceHeight * 0.04,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.user,
-                        color: Colors.grey[500],
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        program.publisherFullname,
-                        style: TextStyle(
-                            color: Colors.grey[500],
-                            fontSize: deviceWidth * 0.04),
-                      )
-                    ],
+                    height: deviceHeight * 0.02,
                   ),
 
-                  SizedBox(
-                    height: deviceHeight * 0.04,
-                  ),
+                  // SizedBox(
+                  //   height: deviceHeight * 0.04,
+                  // ),
                   Text(
                     "Details:",
                     style: TextStyle(
                         color: Colors.grey[500],
-                        fontSize: deviceWidth * 0.05,
+                        fontSize: deviceWidth * 0.042,
                         fontWeight: FontWeight.bold),
                   ),
                   Divider(
@@ -116,7 +92,71 @@ class _ProgramProfileState extends State<ProgramProfile> {
                   // now here
                   Container(
                     child: HtmlWidget(program.description),
-                  )
+                  ),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+
+                          // color: Colors.red,
+                          child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.calendar,
+                            color: Colors.grey[500],
+                            size: 16,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "${dateFormatter(program.dateTime)}",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: deviceWidth * 0.03,
+                                color: Colors.grey[500]),
+                          ),
+                        ],
+                      )),
+                      Container(
+
+                          // color: Colors.red,
+                          child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.clock,
+                            color: Colors.grey[500],
+                            size: 16,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "${program.time}",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: deviceWidth * 0.03,
+                                color: Colors.grey[500]),
+                          ),
+                        ],
+                      )),
+                      Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.user,
+                            color: Colors.grey[500],
+                            size: 16,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            program.publisherFullname,
+                            style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: deviceWidth * 0.03),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             )

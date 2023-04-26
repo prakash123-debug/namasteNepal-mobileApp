@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Provider/galleryProvider.dart';
@@ -59,12 +60,13 @@ class _GalleryState extends State<Gallery> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20)),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.network(
-                                e.value.imageUrl,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(e.value.imageUrl)
+                                // CachedNetworkImage(
+                                //   imageUrl: e.value.imageUrl,
+                                //   fit: BoxFit.cover,
+                                // ),
+                                ),
                           ),
                         );
                       }).toList(),

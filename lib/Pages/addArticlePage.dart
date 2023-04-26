@@ -14,6 +14,8 @@ import 'package:namaste_nepal/Utils/loading.dart';
 import 'package:namaste_nepal/Utils/showSnackBarMessage.dart';
 import 'package:provider/provider.dart';
 
+import '../Utils/dateConverter.dart';
+
 class AddArticle extends StatefulWidget {
   const AddArticle({Key? key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class _AddArticleState extends State<AddArticle> {
   String htmlText = "";
   HtmlEditorController controller = HtmlEditorController();
   Branch? selectedBranch;
-  bool dobSelected = false;
+  bool dateSelected = false;
   DateTime selectedDate = DateTime.now();
   List<Branch> branches = [];
   List<ArticleCategory> articleCategories = [];
@@ -48,7 +50,7 @@ class _AddArticleState extends State<AddArticle> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        dobSelected = true;
+        dateSelected = true;
       });
       print(selectedDate);
     }
@@ -59,9 +61,17 @@ class _AddArticleState extends State<AddArticle> {
 
     // validate
     if (_globalFormKey.currentState!.validate()) {
-      if (!dobSelected || htmlText.isEmpty || image == null) {
+      if (!dateSelected || htmlText.isEmpty || image == null) {
         snackBarViewer.errorSnackbar(context, "All the field are Mandatory!!");
       } else {
+        print({
+          "articleTitle": articleTitleController.text,
+          "branch": selectedBranch!.name,
+          "date": selectedDate,
+          "articleCategory": selectedArticleCategory!.categoryName,
+          "description": htmlText,
+          image: image
+        });
         setState(() {
           isLoading = true;
         });
@@ -82,7 +92,7 @@ class _AddArticleState extends State<AddArticle> {
               selectedBranch = branches.first;
               selectedArticleCategory = articleCategories.first;
               imagePicked = false;
-              dobSelected = false;
+              dateSelected = false;
               isLoading = false;
             });
             snackBarViewer.sucessSnackbar(
@@ -114,6 +124,7 @@ class _AddArticleState extends State<AddArticle> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+
     if (isLoading) {
       loading(context, "Posting");
     } else {
@@ -201,8 +212,8 @@ class _AddArticleState extends State<AddArticle> {
                                   ),
                                 ),
                                 Text(
-                                  dobSelected
-                                      ? "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}"
+                                  dateSelected
+                                      ? "${dateFormatter(selectedDate)}"
                                       : "Select Date",
                                   style: TextStyle(color: Colors.grey),
                                 ),
@@ -245,14 +256,14 @@ class _AddArticleState extends State<AddArticle> {
                       ),
                     ],
                   )),
-                  SizedBox(
-                    height: deviceHeight * 0.02,
-                  ),
+                  // SizedBox(
+                  //   height: deviceHeight * 0.02,
+                  // ),
 
-                  // Ck Editor
-                  Divider(
-                    color: Colors.grey,
-                  ),
+                  // // Ck Editor
+                  // Divider(
+                  //   color: Colors.grey,
+                  // ),
                   SizedBox(
                     height: deviceHeight * 0.02,
                   ),
@@ -271,9 +282,9 @@ class _AddArticleState extends State<AddArticle> {
                   HtmlEditor(
                     controller: controller,
                     htmlEditorOptions: HtmlEditorOptions(
-                      hint: "Article Detail",
-                      //initalText: "text content initial, if any",
-                    ),
+                        hint: "Article Detail", spellCheck: true
+                        //initalText: "text content initial, if any",
+                        ),
                     otherOptions: OtherOptions(
                       height: deviceHeight * 0.4,
                     ),
@@ -346,7 +357,7 @@ class _AddArticleState extends State<AddArticle> {
                               selectedBranch = branches.first;
                               selectedArticleCategory = articleCategories.first;
                               imagePicked = false;
-                              dobSelected = false;
+                              dateSelected = false;
                             });
                             controller.clear();
                             articleTitleController.clear();

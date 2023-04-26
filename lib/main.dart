@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:namaste_nepal/Pages/editUserDetailPage.dart';
 import 'package:namaste_nepal/Pages/homePage.dart';
 import 'package:namaste_nepal/Pages/login.dart';
+import 'package:namaste_nepal/Pages/splashScreen.dart';
 import 'package:namaste_nepal/Pages/userProfile.dart';
 import 'package:namaste_nepal/Provider/announcementCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
 
           // parseColor("#fafaed")
         ),
-        home: const HomePage(),
+        home: const SplashScreen(),
       ),
     );
   }

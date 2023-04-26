@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import "package:http/http.dart" as http;
+import 'package:intl/intl.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
 
 class Announcement {
@@ -13,20 +16,23 @@ class Announcement {
   String description;
   String publisherFullname;
   int publisherId;
-  DateTime dateTime = new DateTime.now();
+  DateTime startDate;
+  DateTime endDate;
   // String publisherImage;
 
-  Announcement({
-    required this.id,
-    required this.title,
-    required this.branchId,
-    required this.announcementCategoryId,
-    required this.announcementImage,
-    required this.description,
-    required this.publisherFullname,
-    required this.publisherId,
-    // required this.publisherImage
-  });
+  Announcement(
+      {required this.id,
+      required this.title,
+      required this.branchId,
+      required this.announcementCategoryId,
+      required this.announcementImage,
+      required this.description,
+      required this.publisherFullname,
+      required this.publisherId,
+      required this.startDate,
+      required this.endDate
+      // required this.publisherImage
+      });
 }
 
 class AnnouncementProvider extends ChangeNotifier {
@@ -81,33 +87,45 @@ class AnnouncementProvider extends ChangeNotifier {
   }
 
   Future getAllAnnouncement() async {
-    Uri url = Uri.parse("$link/announcement");
+    String url = "$link/announcement";
     try {
-      http.Response response = await http.get(url);
-      var data = jsonDecode(response.body)["data"];
+      Response response = await Dio().get(url);
+      var data = response.data["data"];
+      print("=========Ann=======");
+      print(data);
+      print("=========Ann=======");
 
       List<Announcement> tempHolder = [];
       data.forEach((announcement) {
+        DateTime startDate =
+            DateFormat("yyyy-mm-dd").parse(announcement["startDate"]);
+        DateTime endDate =
+            DateFormat("yyyy-mm-dd").parse(announcement["endDate"]);
+
         tempHolder.add(Announcement(
-          id: announcement["id"],
-          title: announcement["title"],
-          branchId: announcement["branchId"],
-          announcementCategoryId: announcement["announcementCategoryId"],
-          announcementImage:
-              "$imageLink/${announcement["announcementImage"]["fileName"]}",
-          description: announcement["description"],
-          publisherFullname: announcement["Publisher"]["fullName"],
-          publisherId: announcement["userId"],
-          // publisherImage: announcement["Publisher"]["profilePicture"]
-        ));
+            id: announcement["id"],
+            title: announcement["title"],
+            branchId: announcement["branchId"],
+            announcementCategoryId: announcement["announcementCategoryId"],
+            announcementImage:
+                "$imageLink/${announcement["announcementImage"]["fileName"]}",
+            description: announcement["description"],
+            publisherFullname: announcement["Publisher"]["fullName"],
+            publisherId: announcement["userId"],
+            startDate: startDate,
+            endDate: endDate
+
+            // publisherImage: announcement["Publisher"]["profilePicture"]
+            ));
       });
-      // _announcement = tempHolder;
+      _announcement = tempHolder;
 
       print("==================Announcement");
       print(_announcement.length);
       print("==================Announcement");
     } catch (e) {
       print(e);
+      log(e.toString());
       throw e;
     }
   }

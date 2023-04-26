@@ -5,6 +5,7 @@ import 'package:namaste_nepal/Provider/newsProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
 import 'package:namaste_nepal/Utils/colorsSelect.dart';
 import 'package:namaste_nepal/Utils/customPageRoute.dart';
+import 'package:namaste_nepal/Utils/dateConverter.dart';
 
 Widget newsCard({required BuildContext context, required NewsData e}) {
   double deviceHeight = MediaQuery.of(context).size.height;
@@ -54,7 +55,7 @@ Widget newsCard({required BuildContext context, required NewsData e}) {
                   child: Row(
                     children: [
                       Text(
-                        e.date,
+                        dateFormatter(e.date),
                         style: TextStyle(
                             fontSize: deviceWidth * 0.03, color: Colors.grey),
                       ),

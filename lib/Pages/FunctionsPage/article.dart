@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:namaste_nepal/Pages/addArticlePage.dart';
 import 'package:namaste_nepal/Pages/articleProfile.dart';
+import 'package:namaste_nepal/Pages/login.dart';
 import 'package:namaste_nepal/Provider/articleProvider.dart';
-import 'package:namaste_nepal/Utils/colorParser.dart';
+import 'package:namaste_nepal/Provider/userProvider.dart';
 import 'package:namaste_nepal/Utils/colorsSelect.dart';
 import 'package:namaste_nepal/Utils/customPageRoute.dart';
 import 'package:namaste_nepal/Widgets/articleListWidget.dart';
@@ -24,6 +26,7 @@ class _ArticlePageState extends State<ArticlePage> {
     double deviceWidth = MediaQuery.of(context).size.width;
     List<Article> listOfArtiicle =
         Provider.of<ArticleProvider>(context).article;
+    bool isAuthorized = Provider.of<UserProvider>(context).authorized;
     return Scaffold(
       appBar: AppBar(
         title: Text("Article"),
@@ -31,7 +34,12 @@ class _ArticlePageState extends State<ArticlePage> {
           IconButton(
               tooltip: "Add Article",
               onPressed: () {
-                Navigator.push(context, CustomPageRoute(child: AddArticle()));
+                if (isAuthorized) {
+                  Navigator.push(context, CustomPageRoute(child: AddArticle()));
+                } else {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => Login()));
+                }
               },
               icon: Icon(FontAwesomeIcons.plus))
         ],
@@ -50,8 +58,8 @@ class _ArticlePageState extends State<ArticlePage> {
                 itemCount: listOfArtiicle.length,
                 itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: deviceHeight * 0.02,
-                          horizontal: deviceWidth * 0.04),
+                          vertical: deviceHeight * 0.01,
+                          horizontal: deviceWidth * 0.02),
                       child: Material(
                         elevation: 2.5,
                         type: MaterialType.card,
@@ -79,16 +87,21 @@ class _ArticlePageState extends State<ArticlePage> {
                                         Container(
                                           width: deviceWidth * 0.2,
                                           decoration: BoxDecoration(
-                                              color: Colors.red,
+                                              // color: Colors.red,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            child: Image.network(
-                                              listOfArtiicle[index]
+                                            child: CachedNetworkImage(
+                                              imageUrl: listOfArtiicle[index]
                                                   .articleImage,
-                                              fit: BoxFit.cover,
+                                              fit: BoxFit.fitHeight,
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons.error,
+                                                // color: Colors.red,
+                                              ),
                                             ),
                                           ),
                                         ),
