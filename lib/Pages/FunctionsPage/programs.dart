@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:namaste_nepal/Pages/programProfile.dart';
 import 'package:namaste_nepal/Provider/programProvider.dart';
@@ -40,8 +41,8 @@ class _ProgramsPageState extends State<ProgramsPage> {
                 itemCount: listOfProgram.length,
                 itemBuilder: (context, index) => Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: deviceHeight * 0.02,
-                          horizontal: deviceWidth * 0.04),
+                          vertical: deviceHeight * 0.01,
+                          horizontal: deviceWidth * 0.02),
                       child: Material(
                         elevation: 2.5,
                         type: MaterialType.card,
@@ -68,15 +69,21 @@ class _ProgramsPageState extends State<ProgramsPage> {
                                         Container(
                                           width: deviceWidth * 0.2,
                                           decoration: BoxDecoration(
-                                              color: Colors.red,
+                                              // color: Colors.red,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            child: Image.network(
-                                              listOfProgram[index].programImage,
-                                              fit: BoxFit.cover,
+                                            child: CachedNetworkImage(
+                                              imageUrl: listOfProgram[index]
+                                                  .programImage,
+                                              fit: BoxFit.fitHeight,
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons.error,
+                                                // color: Colors.red,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -93,15 +100,16 @@ class _ProgramsPageState extends State<ProgramsPage> {
                                         Container(
                                           width: deviceWidth * 0.2,
                                           decoration: BoxDecoration(
-                                              color: Colors.red,
+                                              // color: Colors.red,
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            child: Image.network(
-                                              listOfProgram[index].programImage,
-                                              fit: BoxFit.cover,
+                                            child: CachedNetworkImage(
+                                              imageUrl: listOfProgram[index]
+                                                  .programImage,
+                                              fit: BoxFit.fitHeight,
                                             ),
                                           ),
                                         ),

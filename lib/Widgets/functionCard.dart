@@ -8,6 +8,7 @@ import 'package:namaste_nepal/Pages/FunctionsPage/namasteNepal.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/news.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/programs.dart';
 import 'package:namaste_nepal/Pages/FunctionsPage/socialWork.dart';
+import 'package:namaste_nepal/Pages/chatPage.dart';
 import 'package:namaste_nepal/Provider/announcementProvider.dart';
 import 'package:namaste_nepal/Provider/functionProvider.dart';
 import 'package:namaste_nepal/Utils/colorParser.dart';
@@ -68,7 +69,7 @@ Widget functionCard(BuildContext context, FunctionDetail data) {
           case 5:
             // Navigator.pushNamed(context, "/revenue");
 
-            Navigator.of(context).push(CustomPageRoute(child: SocialWorks()));
+            Navigator.of(context).push(CustomPageRoute(child: ChatPage()));
 
             break;
 

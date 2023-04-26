@@ -61,10 +61,10 @@ Widget footerOfficeDetail(BuildContext context) {
                       InkWell(
                         splashColor: selectColor.cardColor,
                         onTap: () {
-                          urlLunchersFunctions.makePhoneCall("071-4122333");
+                          urlLunchersFunctions.makePhoneCall("+977-9844708763");
                         },
                         child: Text(
-                          "071-4122333",
+                          "+977-9844708763",
                           style: TextStyle(fontSize: deviceWidth * 0.04),
                         ),
                       )
@@ -81,10 +81,10 @@ Widget footerOfficeDetail(BuildContext context) {
                         splashColor: selectColor.cardColor,
                         onTap: () {
                           urlLunchersFunctions
-                              .sendMail("namastenepal@gmail.com");
+                              .sendMail("namastenepal2068@gmail.com");
                         },
                         child: Text(
-                          "namastenepal@gmail.com",
+                          "namastenepal2068@gmail.com",
                           style: TextStyle(fontSize: deviceWidth * 0.04),
                         ),
                       )
@@ -100,10 +100,11 @@ Widget footerOfficeDetail(BuildContext context) {
                       InkWell(
                         splashColor: selectColor.cardColor,
                         onTap: () {
-                          urlLunchersFunctions.openWeb("http://youtube.com");
+                          urlLunchersFunctions
+                              .openWeb("https://namastenepal.netlify.app/");
                         },
                         child: Text(
-                          "https://www.namastenepal.com",
+                          "https://namastenepal.netlify.app",
                           style: TextStyle(
                               fontSize: deviceWidth * 0.04,
                               color: Colors.blue,

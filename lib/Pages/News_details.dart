@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:namaste_nepal/Utils/server_link.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../Utils/dateConverter.dart';
 
 class NewsDetails extends StatefulWidget {
   Map<String, dynamic> arg = {};
@@ -49,7 +52,7 @@ class _NewsDetailsState extends State<NewsDetails> {
         ),
         title: Text(
           "${arg['title']}",
-          style: TextStyle(color: Colors.white, fontSize: deviceWidth * 0.05),
+          style: TextStyle(color: Colors.white, fontSize: deviceWidth * 0.043),
         ),
       ),
       body: Padding(
@@ -57,7 +60,7 @@ class _NewsDetailsState extends State<NewsDetails> {
             vertical: deviceHeight * 0.020, horizontal: deviceWidth * 0.06),
         child: SingleChildScrollView(
           child: Container(
-            height: deviceHeight,
+            // height: deviceHeight,
             width: deviceWidth,
             child: Column(
               children: [
@@ -67,7 +70,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: deviceWidth * 0.05,
+                    fontSize: deviceWidth * 0.045,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -78,7 +81,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "${arg['date']}",
+                      "${dateFormatter(arg['date'])}",
                       style: TextStyle(
                           fontSize: deviceWidth * 0.03, color: Colors.grey),
                     ),
@@ -99,8 +102,9 @@ class _NewsDetailsState extends State<NewsDetails> {
                 HtmlWidget(arg['description']),
                 // Text("${arg['description']}"),
                 SizedBox(
-                  height: deviceHeight * 0.03,
+                  height: deviceHeight * 0.01,
                 ),
+                Divider(),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -110,7 +114,13 @@ class _NewsDetailsState extends State<NewsDetails> {
                               border: Border.all(
                                   color: Theme.of(context).primaryColor,
                                   width: 2)),
-                          child: Image.network("$imageLink/${arg['image']}"))
+                          child: CachedNetworkImage(
+                            imageUrl: arg['image'],
+                            errorWidget: (context, url, error) => Icon(
+                              Icons.error,
+                              // color: Colors.red,
+                            ),
+                          ))
                       : ElevatedButton(
                           style: ButtonStyle(
                               fixedSize: MaterialStateProperty.all(

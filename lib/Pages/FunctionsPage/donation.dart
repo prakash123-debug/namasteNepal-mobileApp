@@ -36,7 +36,7 @@ class _DonationPageState extends State<DonationPage> {
                     width: deviceWidth,
                     // color: Colors.red,
                     child: ClipRRect(
-                      child: Image.network(
+                      child: Image.asset(
                         donationDetail.qrCode,
                         fit: BoxFit.fitWidth,
                       ),

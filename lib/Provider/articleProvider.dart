@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:intl/intl.dart';
 
 import 'package:namaste_nepal/Provider/articalCategoryProvider.dart';
 import 'package:namaste_nepal/Provider/branchProvider.dart';
@@ -22,7 +23,7 @@ class Article {
   String description;
   String publisherFullname;
   int publisherId;
-  DateTime dateTime = new DateTime.now();
+  DateTime dateTime;
 
   Article(
       {required this.id,
@@ -32,7 +33,8 @@ class Article {
       required this.articleImage,
       required this.description,
       required this.publisherFullname,
-      required this.publisherId});
+      required this.publisherId,
+      required this.dateTime});
 }
 
 class ArticleProvider extends ChangeNotifier {
@@ -91,18 +93,21 @@ class ArticleProvider extends ChangeNotifier {
       http.Response response = await http.get(url);
       var data = jsonDecode(response.body)["data"];
       List<Article> tempHolder = [];
-      data.forEach((article) => {
-            tempHolder.add(Article(
-                id: article["id"],
-                title: article["title"],
-                branchId: article["branchId"],
-                articleCategoryId: article["articleCategoryId"],
-                articleImage:
-                    "$imageLink/${article["articleImage"]["fileName"]}",
-                description: article["description"],
-                publisherFullname: article["Publisher"]["fullName"],
-                publisherId: article["userId"]))
-          });
+      DateTime convertedDate;
+      data.forEach((article) {
+        convertedDate = DateFormat("yyyy-mm-dd").parse(article["date"]);
+        print(convertedDate);
+        tempHolder.add(Article(
+            id: article["id"],
+            title: article["title"],
+            branchId: article["branchId"],
+            articleCategoryId: article["articleCategoryId"],
+            articleImage: "$imageLink/${article["articleImage"]["fileName"]}",
+            description: article["description"],
+            publisherFullname: article["Publisher"]["fullName"],
+            publisherId: article["userId"],
+            dateTime: convertedDate));
+      });
       _article = tempHolder;
       print("==================Article");
       print(_article.length);
